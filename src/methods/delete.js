@@ -12,10 +12,19 @@ module.exports = async (
 		'INVALID_PARAMS_PROVIDED'
 	)
 ) => {
-	await deleteFN(`${baseURL}/documents/${key}`, {}, { headers: { secret: secret}}).catch((error) => {
+	await deleteFN(
+		`${baseURL}/documents/${key}`,
+		{ headers: { secret: secret } }
+	).catch((error) => {
 		if (error.response)
 			return JSPasteError(
-				`An error occurred while making the request on JSPaste.delete function: ${error.response.status} ${error.message}`,
+				`An error occurred while making the request on JSPaste.delete function: ${
+					error.response.status
+				} ${
+					error.response.data.message
+						? error.response.data.message
+						: error.message
+				}`,
 				'ERROR_ON_REQUEST'
 			);
 

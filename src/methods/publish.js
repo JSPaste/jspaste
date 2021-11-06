@@ -13,7 +13,13 @@ module.exports = async (
 	const res = await postFN(`${baseURL}/documents`, body).catch((error) => {
 		if (error.response)
 			return JSPasteError(
-				`An error occurred while making the request on JSPaste.publish function: ${error.response.status} ${error.message}`,
+				`An error occurred while making the request on JSPaste.publish function: ${
+					error.response.status
+				} ${
+					error.response.data.message
+						? error.response.data.message
+						: error.message
+				}`,
 				'ERROR_ON_REQUEST'
 			);
 
@@ -37,5 +43,6 @@ module.exports = async (
 		}, deleteTime);
 	}
 
-	return data;
+
+	return { url: `${baseURL}/${data.key}`, ...data };
 };

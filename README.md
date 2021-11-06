@@ -1,142 +1,134 @@
-![logo](https://cdn.discordapp.com/attachments/700345457343201314/804447945814441994/japastelogo.png)
+![logo](https://jspaste.tk/logo.png)
 
-# jspaste
- - Paquete jspaste oficial. Publica y obten datos de [jspaste](https://jspaste.tnfangel.repl.co/).
+# JSPaste
+ - JSPaste Official API wrapper for Node.js. Publish, get, and delete [JSPaste](https://jspaste.tk/) documents.
 
-- El modulo es muy rapido, se tiene que usar con async/await
+- Lightweight module, with modern JS and async / await.
 
-- El modulo ha sido desarrollado por `tnfAngel#8642`
-# Documentacion
-**Definir**
-- Para declararlo en tu codigo puedes poner lo siguiente:
+- Package developed by `tnfAngel#6557`.
+
+# Docs
+
+**Declare**
+
+- For declare JSPaste in your code, just write:
+
 ```js
 
-const jsp = require('jspaste')
+const jsp = require('jspaste');
 
 ```
 
-**Funciones**
-- publicar
+**Methods**
 
-Publica un codigo a jspaste, devuelve el enlace entero.
+- Publish | `.publish(body: string, deleteTime?: number)` -> Object(ResponseData)
+
+Publish a document to JSPaste.
+
 ```js
 
-await jsp.publicar('Hola, esto es una prueba')
+await jsp.publish('Hello world!');
 
 /* 
-Esto daria un objeto como este: {
-  url: 'https://jspaste.tnfangel.repl.co/teMtAKuetGO',
-  clave: 'teMtAKuetGO',
-  secret: 'wp3du8494325422c4z2c22x4f3f3z32f3trxd'
-} 
+This should return something like this: {
+  url: 'https://jspaste.tk/ocev',
+  key: 'ocev',
+  secret: 'x5pz.22gu.r5qa.tobw'
+}
 */
 
+// You also can do this if you want the data:
 
-/* Tambien puedes definir un enlace de esta manera: */
+const data = await jsp.publish('Hello world!');
 
-let link = await jsp.publicar('Hola, esto es una prueba')
+console.log(data.url); // https://jspaste.tk/ocev
 
-console.log(link.url)
+// OR:
 
-/* Tambien puedes publicar temporalmente: */
+const data = await jsp.publish('Hello world!', 10000); // Document will be deleted after 10000 milliseconds.
 
-let link = await jsp.publicar('Hola, esto es una prueba', 10000) // Tiempo en milisegundos
-
-console.log(link.url)
-
-```
-
-- obtener
-
-Obtiene un codigo de jspaste, usando su clave unica.
-```js
-
-await jsp.obtener('iRhkODYUYG')
-
-/*
-Esto daria un objeto, con la clave y el contenido, en este caso:
-{ key: "iRhkODYUYG", data: "Hola, esto es una prueba"}
-*/
-
-
-/* Tambien puedes definirlo de esta manera: */
-
-let obtenido = await jsp.obtener('iRhkODYUYG')
-
-console.log(obtenido.data) // Hola, esto es una prueba
+console.log(data.url); // https://jspaste.tk/sdsf
 
 ```
 
-- existe
+- Get | `.get(key: string)` -> String(JSPasteDocument)
 
-Comprueba si un codigo de jspaste existe, usando su clave unica. Returna true o false.
-```js
-
-await jsp.existe('a') // true
-
-await jsp.existe() // Error
-
-await jsp.existe('wcr3243 23f4r2cr2rc') // false 
-
-
-/* Tambien puedes definirlo de esta manera: */
-
-let obtenido = await jsp.existe('a')
-
-console.log(obtenido) // true
-
-```
-
-- eliminar
-
-Elimina un codigo de jspaste, usando su clave unica y secret.
-```js
-
-await jsp.eliminar('clave', 'secret')
-
-
-/*
-Si todo sale bien, retornara true.
-*/
-
-
-/* Tambien puedes definirlo de esta manera: */
-
-let eliminado = await jsp.eliminar('iRhkODYUYG', '324353543xc3ex3rc3rcrrwqzxxrwr')
-
-console.log(eliminado) // true
-
-```
-# Ejemplo completo
-
-- Ejemplo completo usando jspaste
+Gets a document from JSPaste by its key.
 
 ```js
 
-const jsp = require('jspaste')
+await jsp.get('iRhkODYUYG'); // Hello world!
 
-let enlace = await jsp.publicar('Bienvenido a jspaste.')
+// OR:
 
-console.log(enlace.url)
+const data = await jsp.get('iRhkODYUYG');
 
-let obtenido = await jsp.obtener(enlace.clave)
-
-console.log(obtenido.data)
+console.log(data); // Hello world!
 
 ```
 
-# Instalacion
+- Exists | `.exists(key: string)` -> Boolean(JSPasteDocument)
 
-_Si tienes problemas con la instalacion puedes unirte al [servidor de soporte de Discord](https://discord.gg/8RNAdpK)._
+Checks if a document exists in JSPaste by its key.
 
-**Linux y Windows**
+```js
 
-`npm i jspaste`
+await jsp.exists('rza'); // true
 
-**Mac**
+await jsp.exists(); // Error
 
-Instala: `XCode`
+await jsp.exists('Rr3rFE32frr'); // false 
 
-Pon: `npm i -g node-gyp` en terminal
 
-Pon: `npm i jspaste`# jspaste-api
+// OR
+
+const exists = await jsp.exists('rza');
+
+console.log(exists); // true
+
+```
+
+- Delete | `.delete(key: string, secret: string)` -> Boolean(DeleteState)
+
+Deletes a document from JSPaste by its key and secret.
+
+```js
+
+await jsp.delete('key', 'secret');
+
+// OR
+
+const deleted = await jsp.delete('rza', '2ads.fdfw.32ww.fwt4');
+
+console.log(deleted); // true
+
+```
+# Full example
+
+- Full example using JSPaste
+
+```js
+
+const jsp = require('jspaste');
+
+const response = await jsp.publish('Hello world!');
+
+console.log(response.url);
+
+const data = await jsp.get(response.key);
+
+console.log(data);
+
+```
+
+# Installation
+
+_If you have installation issues, please join our [Discord support server](https://discord.gg/8RNAdpK)._
+
+**Node Package Manager**
+
+`npm install jspaste`
+
+**Yarn**
+
+`yarn add jspaste`

@@ -10,6 +10,10 @@ module.exports = {
 			{
 				creator: 'Inetol#0840',
 				github: 'https://github.com/InetolVault/rdtspaste'
+			},
+			{
+				creator: 'Aidak',
+				github: 'https://github.com/Aidakkk/gopaste'
 			}
 		]
 	}

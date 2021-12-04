@@ -1,114 +1,145 @@
-![logo](https://jspaste.tk/logo.png)
+<a href="https://jspaste.tk">
+<img src="https://jspaste.tk/logo.png" alt="JSPaste Logo" width="250" height="250" align="right"/>
+</a>
 
 # JSPaste
 
 - JSPaste Official API wrapper for Node.js. Publish, get, and remove [JSPaste](https://jspaste.tk/) documents.
-
 - Lightweight module, with modern JS and async / await.
+- Package developed by `tnfAngel#6557`
 
-- Package developed by `tnfAngel#6557`.
+## Docs
 
-# Docs
+### Declare
 
-**Declare**
-
-- For declare JSPaste in your code, just write:
+- To declare JSPaste in your code you can do it with ...
 
 ```js
-const jsp = require('jspaste');
+// ES6
+import { JSP as Methods } from 'jspaste';
+
+const JSP = new Methods();
+
+
+// CommonJS (default)
+const Methods = require('jspaste').JSP;
+
+const JSP = new Methods();
 ```
 
-**Methods**
+### Methods
 
-- Publish | `.publish(body: string, deleteTime?: number)` -> Object(ResponseData)
+###### Publish | `.publish(body: string)` -> Object(ResponseData)
 
-Publish a document to JSPaste.
+Publish a document to JSPaste ...
 
 ```js
-await JSP.publish('Hello world!');
+await JSP.publish('Hello world!').catch(console.error).then(r => {
 
-/* 
- This should return something like this:
-    
- {
-    url: 'https://jspaste.tk/ocev',
-    key: 'ocev',
-    secret: 'x5pz.22gu.r5qa.tobw'
- }
- */
+    console.info(r);
 
-// You also can do this if you want the data:
+    /**
+     * {
+     *     url: 'https://jspaste.tk/rza',
+     *     key: 'rza',
+     *     secret: 'x5pz.22gu.r5qa.tobw'
+     * }
+     */
+
+    // ... Other code ... //
+
+});
+
+// OR
 
 const data = await JSP.publish('Hello world!');
-
-console.log(data.url); // https://jspaste.tk/ocev
-
-// OR:
-
-const data = await JSP.publish('Hello world!', 10000); // Document will be deleted after 10000 milliseconds.
-
-console.log(data.url); // https://jspaste.tk/sdsf
+console.info(data.url); // https://jspaste.tk/rza
 ```
 
-- Get | `.get(key: string)` -> String(JSPasteDocument)
+###### Get | `.get(key: string)` -> String(JSPasteDocument)
 
-Gets a document from JSPaste by its key.
+Gets a JSPaste document using the key ...
 
 ```js
-await JSP.get('iRhkODYUYG'); // Hello world!
+await JSP.get('rza').catch(console.error).then(r => {
 
-// OR:
+    console.info(r); // Hello world!
 
-const data = await JSP.get('iRhkODYUYG');
+    // ... Other code ... //
 
-console.log(data); // Hello world!
+});
+
+// OR
+
+const data = await JSP.get('rza');
+console.info(data); // Hello world!
 ```
 
-- Check | `.check(key: string)` -> Boolean(JSPasteDocument)
+###### Check | `.check(key: string)` -> Boolean(JSPasteDocument)
 
-Checks if a document exists in JSPaste by its key.
+Validate if any JSPaste document exists using that key ...
 
 ```js
-await JSP.check('rza'); // true
+await JSP.check('rza').catch(console.error).then(r => {
 
-await JSP.check(); // Error
+    console.info(r); // true
 
-await JSP.check('Rr3rFE32frr'); // false
+    // ... Other code ... //
+
+});
 
 // OR
 
 const exists = await JSP.check('rza');
-
-console.log(exists); // true
+console.info(exists); // true
 ```
 
-- Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
+###### Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
 
-Deletes a document from JSPaste by its key and secret.
+Delete a JSPaste document using the key and secret ...
 
 ```js
-await JSP.remove('key', 'secret');
+await JSP.remove('rza', '2ads.fdfw.32ww.fwt4').catch(console.error).then(r => {
+
+    console.info(r); // true
+
+    // ... Other code ... //
+
+});
 
 // OR
 
 const deleted = await JSP.remove('rza', '2ads.fdfw.32ww.fwt4');
-
-console.log(deleted); // true
+console.info(deleted); // true
 ```
 
-# Full example
+---
 
-- Full example using JSPaste
+## Example
 
 ```js
-const JSP = require('jspaste');
+// ES6
+import { JSP as Methods, info } from 'jspaste';
+
+const JSP = new Methods();
+
 const response = await JSP.publish('Hello world!');
+console.info(response);
 
-console.log(response.url);
-
-const data = await JSP.get(response.key);
-
-console.log(data);
+console.info(await JSP.get(response.key));
 ```
 
-_If you have issues, please join our [Discord support server](https://discord.gg/8RNAdpK)._
+```js
+// CommonJS (default)
+const Methods = require('jspaste').JSP;
+
+const JSP = new Methods();
+
+const response = await JSP.publish('Hello world!');
+console.info(response);
+
+console.info(await JSP.get(response.key));
+```
+
+_If you have any issues or want to make any suggestions, don't forget to join
+our [Discord server](https://discord.gg/8RNAdpK)_

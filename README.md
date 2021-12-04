@@ -20,7 +20,7 @@ import { JSP } from 'jspaste';
 
 
 // CommonJS (default)
-const JSP = require('jspaste').JSP;
+const { JSP } = require('jspaste');
 ```
 
 ### Methods
@@ -123,7 +123,7 @@ console.info(await JSP.get(response.key));
 
 ```js
 // CommonJS (default)
-const JSP = require('jspaste').JSP;
+const { JSP } = require('jspaste');
 
 const response = await JSP.publish('Hello world!');
 console.info(response);

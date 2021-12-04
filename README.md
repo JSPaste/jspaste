@@ -16,15 +16,11 @@
 
 ```js
 // ES6
-import { JSP as Methods } from 'jspaste';
-
-const JSP = new Methods();
+import { JSP } from 'jspaste';
 
 
 // CommonJS (default)
-const Methods = require('jspaste').JSP;
-
-const JSP = new Methods();
+const JSP = require('jspaste').JSP;
 ```
 
 ### Methods
@@ -117,9 +113,7 @@ console.info(deleted); // true
 
 ```js
 // ES6
-import { JSP as Methods, info } from 'jspaste';
-
-const JSP = new Methods();
+import { JSP } from 'jspaste';
 
 const response = await JSP.publish('Hello world!');
 console.info(response);
@@ -129,9 +123,7 @@ console.info(await JSP.get(response.key));
 
 ```js
 // CommonJS (default)
-const Methods = require('jspaste').JSP;
-
-const JSP = new Methods();
+const JSP = require('jspaste').JSP;
 
 const response = await JSP.publish('Hello world!');
 console.info(response);

@@ -29,7 +29,7 @@ const JSP = new Methods();
 
 ### Methods
 
-###### Publish | `.publish(body: string)` -> Object(ResponseData)
+##### Publish | `.publish(body: string)` -> Object(ResponseData)
 
 Publish a document to JSPaste ...
 
@@ -56,7 +56,7 @@ const data = await JSP.publish('Hello world!');
 console.info(data.url); // https://jspaste.tk/rza
 ```
 
-###### Get | `.get(key: string)` -> String(JSPasteDocument)
+##### Get | `.get(key: string)` -> String(JSPasteDocument)
 
 Gets a JSPaste document using the key ...
 
@@ -75,7 +75,7 @@ const data = await JSP.get('rza');
 console.info(data); // Hello world!
 ```
 
-###### Check | `.check(key: string)` -> Boolean(JSPasteDocument)
+##### Check | `.check(key: string)` -> Boolean(JSPasteDocument)
 
 Validate if any JSPaste document exists using that key ...
 
@@ -94,7 +94,7 @@ const exists = await JSP.check('rza');
 console.info(exists); // true
 ```
 
-###### Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
+##### Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
 
 Delete a JSPaste document using the key and secret ...
 
@@ -112,8 +112,6 @@ await JSP.remove('rza', '2ads.fdfw.32ww.fwt4').catch(console.error).then(r => {
 const deleted = await JSP.remove('rza', '2ads.fdfw.32ww.fwt4');
 console.info(deleted); // true
 ```
-
----
 
 ## Example
 

@@ -1,12 +1,9 @@
 {
   "name": "jspaste",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "JSPaste Official API wrapper for Node.js. Publish, get, and delete JSPaste documents.",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index",
-    "test": "node test"
-  },
+  "author": "tnfAngel",
+  "license": "MIT",
   "keywords": [
     "JSPaste",
     "hastebin",
@@ -14,8 +11,10 @@
     "tnfAngel",
     "jspaste"
   ],
-  "author": "tnfAngel",
-  "license": "MIT",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "axios": "^0.24.0"
   }

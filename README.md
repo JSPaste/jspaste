@@ -1,134 +1,135 @@
-![logo](https://jspaste.tk/logo.png)
+<a href="https://jspaste.tk">
+<img src="https://jspaste.tk/logo.png" alt="JSPaste Logo" width="250" height="250" align="right"/>
+</a>
 
 # JSPaste
- - JSPaste Official API wrapper for Node.js. Publish, get, and delete [JSPaste](https://jspaste.tk/) documents.
 
-- Lightweight module, with modern JS and async / await.
+- [JSPaste](https://jspaste.tk) official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.
+- Lightweight module, **ES6** and **CommonJS** compatible.
+- Package developed by `tnfAngel#6557`
 
-- Package developed by `tnfAngel#6557`.
+## Docs
 
-# Docs
+### Declare
 
-**Declare**
-
-- For declare JSPaste in your code, just write:
+- To declare JSPaste in your code you can do it with ...
 
 ```js
+// ES6
+import { JSP } from 'jspaste';
 
-const jsp = require('jspaste');
 
+// CommonJS (default)
+const { JSP } = require('jspaste');
 ```
 
-**Methods**
+### Methods
 
-- Publish | `.publish(body: string, deleteTime?: number)` -> Object(ResponseData)
+##### Publish | `.publish(body: string)` -> Object(ResponseData)
 
-Publish a document to JSPaste.
-
-```js
-
-await jsp.publish('Hello world!');
-
-/* 
-This should return something like this: {
-  url: 'https://jspaste.tk/ocev',
-  key: 'ocev',
-  secret: 'x5pz.22gu.r5qa.tobw'
-}
-*/
-
-// You also can do this if you want the data:
-
-const data = await jsp.publish('Hello world!');
-
-console.log(data.url); // https://jspaste.tk/ocev
-
-// OR:
-
-const data = await jsp.publish('Hello world!', 10000); // Document will be deleted after 10000 milliseconds.
-
-console.log(data.url); // https://jspaste.tk/sdsf
-
-```
-
-- Get | `.get(key: string)` -> String(JSPasteDocument)
-
-Gets a document from JSPaste by its key.
+Publish a document to JSPaste ...
 
 ```js
+await JSP.publish('Hello world!').catch(console.error).then(r => {
 
-await jsp.get('iRhkODYUYG'); // Hello world!
+    console.info(r);
 
-// OR:
+    /**
+     * {
+     *     url: 'https://jspaste.tk/rza',
+     *     key: 'rza',
+     *     secret: 'x5pz.22gu.r5qa.tobw'
+     * }
+     */
 
-const data = await jsp.get('iRhkODYUYG');
+    // ... Other code ... //
 
-console.log(data); // Hello world!
-
-```
-
-- Exists | `.exists(key: string)` -> Boolean(JSPasteDocument)
-
-Checks if a document exists in JSPaste by its key.
-
-```js
-
-await jsp.exists('rza'); // true
-
-await jsp.exists(); // Error
-
-await jsp.exists('Rr3rFE32frr'); // false 
-
+});
 
 // OR
 
-const exists = await jsp.exists('rza');
-
-console.log(exists); // true
-
+const data = await JSP.publish('Hello world!');
+console.info(data.url); // https://jspaste.tk/rza
 ```
 
-- Delete | `.delete(key: string, secret: string)` -> Boolean(DeleteState)
+##### Get | `.get(key: string)` -> String(JSPasteDocument)
 
-Deletes a document from JSPaste by its key and secret.
+Gets a JSPaste document using the key ...
 
 ```js
+await JSP.get('rza').catch(console.error).then(r => {
 
-await jsp.delete('key', 'secret');
+    console.info(r); // Hello world!
+
+    // ... Other code ... //
+
+});
 
 // OR
 
-const deleted = await jsp.delete('rza', '2ads.fdfw.32ww.fwt4');
-
-console.log(deleted); // true
-
+const data = await JSP.get('rza');
+console.info(data); // Hello world!
 ```
-# Full example
 
-- Full example using JSPaste
+##### Check | `.check(key: string)` -> Boolean(JSPasteDocument)
+
+Validate if any JSPaste document exists using that key ...
 
 ```js
+await JSP.check('rza').catch(console.error).then(r => {
 
-const jsp = require('jspaste');
+    console.info(r); // true
 
-const response = await jsp.publish('Hello world!');
+    // ... Other code ... //
 
-console.log(response.url);
+});
 
-const data = await jsp.get(response.key);
+// OR
 
-console.log(data);
-
+const exists = await JSP.check('rza');
+console.info(exists); // true
 ```
 
-# Installation
+##### Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
 
-_If you have installation issues, please join our [Discord support server](https://discord.gg/8RNAdpK)._
+Delete a JSPaste document using the key and secret ...
 
-**Node Package Manager**
+```js
+await JSP.remove('rza', '2ads.fdfw.32ww.fwt4').catch(console.error).then(r => {
 
-`npm install jspaste`
+    console.info(r); // true
 
-**Yarn**
+    // ... Other code ... //
 
-`yarn add jspaste`
+});
+
+// OR
+
+const deleted = await JSP.remove('rza', '2ads.fdfw.32ww.fwt4');
+console.info(deleted); // true
+```
+
+## Example
+
+```js
+// ES6
+import { JSP } from 'jspaste';
+
+const response = await JSP.publish('Hello world!');
+console.info(response);
+
+console.info(await JSP.get(response.key));
+```
+
+```js
+// CommonJS (default)
+const { JSP } = require('jspaste');
+
+const response = await JSP.publish('Hello world!');
+console.info(response);
+
+console.info(await JSP.get(response.key));
+```
+
+_If you have any issues or want to make any suggestions, don't forget to join
+our [Discord server](https://discord.gg/8RNAdpK)_

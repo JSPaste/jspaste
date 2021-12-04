@@ -8,7 +8,7 @@ const constants = {
 const info = {
     name: 'JSPaste',
     version: require('../../package.json').version,
-    creator: 'tnfAngel#6557',
+    author: 'tnfAngel#6557',
     web: 'https://jspaste.tk',
     github: 'https://github.com/tnfAngel/jspaste-api',
     credits: [{

@@ -113,22 +113,26 @@ console.info(deleted); // true
 
 ```js
 // ES6
-import { JSP } from 'jspaste';
+import { JSP, info } from 'jspaste';
 
 const response = await JSP.publish('Hello world!');
 console.info(response);
 
 console.info(await JSP.get(response.key));
+
+console.info(info.name + ' ' + info.version + ' by ' + info.author)
 ```
 
 ```js
 // CommonJS (default)
-const { JSP } = require('jspaste');
+const { JSP, info } = require('jspaste');
 
 const response = await JSP.publish('Hello world!');
 console.info(response);
 
 console.info(await JSP.get(response.key));
+
+console.info(info.name + ' ' + info.version + ' by ' + info.author)
 ```
 
 _If you have any issues or want to make any suggestions, don't forget to join

@@ -4,8 +4,8 @@
 
 # JSPaste
 
-- JSPaste Official API wrapper for Node.js. Publish, get, and remove [JSPaste](https://jspaste.tk/) documents.
-- Lightweight module, with modern JS and async / await.
+- [JSPaste](https://jspaste.tk/) official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.
+- Lightweight module, **ES6** and **CommonJS** compatible.
 - Package developed by `tnfAngel#6557`
 
 ## Docs

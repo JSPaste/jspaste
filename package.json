@@ -1,7 +1,7 @@
 {
 	"name": "jspaste",
-	"version": "9.0.0",
-	"description": "JSPaste official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.",
+	"version": "9.0.1",
+	"description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
 	"author": "tnfAngel",
 	"license": "MIT",
 	"keywords": [

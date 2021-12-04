@@ -1,6 +1,7 @@
-(async () => {
-	const jsp = require('./index');
-	console.log(jsp);
+'use strict';
 
-    console.log(await jsp.publish('Hello world!'));
+import { JSP } from './src/JSP.js';
+
+(async () => {
+    console.info(await JSP.publish('Hello world!'));
 })();

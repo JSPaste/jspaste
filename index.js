@@ -1,6 +1,6 @@
 'use strict';
 
-import { JSP } from './src/JSP.js';
-import { info } from './src/misc/constants.js';
+const methods = require('./src/methods.js');
+const info = require('./src/misc/constants.js').info;
 
-export { JSP, info }
+module.exports = {methods, info}

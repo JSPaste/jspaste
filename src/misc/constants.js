@@ -1,16 +1,13 @@
 'use strict';
 
-export let constants
-export let info
-
-constants = {
+const constants = {
     baseURL: 'https://jspaste.tk',
     routeURL: '/documents/'
-}
+};
 
-info = {
+const info = {
     name: 'JSPaste',
-    version: '9.0.0', // import('../../package.json').version // --experimental-json-modules
+    version: require('../../package.json').version,
     creator: 'tnfAngel#6557',
     web: 'https://jspaste.tk',
     github: 'https://github.com/tnfAngel/jspaste-api',
@@ -21,4 +18,6 @@ info = {
         creator: 'Aidak',
         github: 'https://github.com/Aidakkk/gopaste'
     }]
-}
+};
+
+module.exports = {constants, info};

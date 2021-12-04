@@ -1,6 +1,6 @@
 'use strict';
 
-export class Handler {
+class ErrorHandler {
 
     /**
      * @param e Error code output
@@ -11,5 +11,7 @@ export class Handler {
 
     static Error(e, s) {
         throw new Error('[JSP Error ' + e + '] => ' + s)
-    }
+    };
 }
+
+module.exports = {ErrorHandler};

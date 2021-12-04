@@ -12,7 +12,6 @@
     "jspaste"
   ],
   "main": "index.js",
-  "type": "module",
   "engines": {
     "node": ">=14"
   },

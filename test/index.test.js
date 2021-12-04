@@ -1,9 +1,9 @@
 'use strict';
 
 // Testing CommonJS JSP
-const {methods, info} = require('../index.js');
+const {JSP, info} = require('../index.js');
 
 (async () => {
-    console.warn(await methods.publish('Hello world!'));
+    console.warn(await JSP.publish('Hello world!'));
     console.warn(info);
 })();

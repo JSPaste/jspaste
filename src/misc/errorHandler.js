@@ -1,7 +1,6 @@
 'use strict';
 
 class ErrorHandler {
-
     /**
      * @param e Error code output
      * @param s Error text output

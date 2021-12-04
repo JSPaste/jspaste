@@ -7,6 +7,7 @@ const handler = require('./misc/errorHandler.js').ErrorHandler;
 const invalid = ['INVALID_PARAMS_PROVIDED', '"Key" or "Secret" is invalid or missing in the parameters', 'No body provided for the document'];
 const request = ['ERROR_ON_REQUEST', 'An error occurred while making the request: '];
 
+
 /**
  * @param key The identifier in order to find the document
  * @param secret The token to verify the document ownership

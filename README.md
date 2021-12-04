@@ -1,7 +1,8 @@
 ![logo](https://jspaste.tk/logo.png)
 
 # JSPaste
- - JSPaste Official API wrapper for Node.js. Publish, get, and delete [JSPaste](https://jspaste.tk/) documents.
+
+- JSPaste Official API wrapper for Node.js. Publish, get, and remove [JSPaste](https://jspaste.tk/) documents.
 
 - Lightweight module, with modern JS and async / await.
 
@@ -14,9 +15,7 @@
 - For declare JSPaste in your code, just write:
 
 ```js
-
 const jsp = require('jspaste');
-
 ```
 
 **Methods**
@@ -26,29 +25,29 @@ const jsp = require('jspaste');
 Publish a document to JSPaste.
 
 ```js
-
-await jsp.publish('Hello world!');
+await JSP.publish('Hello world!');
 
 /* 
-This should return something like this: {
-  url: 'https://jspaste.tk/ocev',
-  key: 'ocev',
-  secret: 'x5pz.22gu.r5qa.tobw'
-}
-*/
+ This should return something like this:
+    
+ {
+    url: 'https://jspaste.tk/ocev',
+    key: 'ocev',
+    secret: 'x5pz.22gu.r5qa.tobw'
+ }
+ */
 
 // You also can do this if you want the data:
 
-const data = await jsp.publish('Hello world!');
+const data = await JSP.publish('Hello world!');
 
 console.log(data.url); // https://jspaste.tk/ocev
 
 // OR:
 
-const data = await jsp.publish('Hello world!', 10000); // Document will be deleted after 10000 milliseconds.
+const data = await JSP.publish('Hello world!', 10000); // Document will be deleted after 10000 milliseconds.
 
 console.log(data.url); // https://jspaste.tk/sdsf
-
 ```
 
 - Get | `.get(key: string)` -> String(JSPasteDocument)
@@ -56,79 +55,60 @@ console.log(data.url); // https://jspaste.tk/sdsf
 Gets a document from JSPaste by its key.
 
 ```js
-
-await jsp.get('iRhkODYUYG'); // Hello world!
+await JSP.get('iRhkODYUYG'); // Hello world!
 
 // OR:
 
-const data = await jsp.get('iRhkODYUYG');
+const data = await JSP.get('iRhkODYUYG');
 
 console.log(data); // Hello world!
-
 ```
 
-- Exists | `.exists(key: string)` -> Boolean(JSPasteDocument)
+- Check | `.check(key: string)` -> Boolean(JSPasteDocument)
 
 Checks if a document exists in JSPaste by its key.
 
 ```js
+await JSP.check('rza'); // true
 
-await jsp.exists('rza'); // true
+await JSP.check(); // Error
 
-await jsp.exists(); // Error
-
-await jsp.exists('Rr3rFE32frr'); // false 
-
+await JSP.check('Rr3rFE32frr'); // false
 
 // OR
 
-const exists = await jsp.exists('rza');
+const exists = await JSP.check('rza');
 
 console.log(exists); // true
-
 ```
 
-- Delete | `.delete(key: string, secret: string)` -> Boolean(DeleteState)
+- Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
 
 Deletes a document from JSPaste by its key and secret.
 
 ```js
-
-await jsp.delete('key', 'secret');
+await JSP.remove('key', 'secret');
 
 // OR
 
-const deleted = await jsp.delete('rza', '2ads.fdfw.32ww.fwt4');
+const deleted = await JSP.remove('rza', '2ads.fdfw.32ww.fwt4');
 
 console.log(deleted); // true
-
 ```
+
 # Full example
 
 - Full example using JSPaste
 
 ```js
-
-const jsp = require('jspaste');
-
-const response = await jsp.publish('Hello world!');
+const JSP = require('jspaste');
+const response = await JSP.publish('Hello world!');
 
 console.log(response.url);
 
-const data = await jsp.get(response.key);
+const data = await JSP.get(response.key);
 
 console.log(data);
-
 ```
 
-# Installation
-
-_If you have installation issues, please join our [Discord support server](https://discord.gg/8RNAdpK)._
-
-**Node Package Manager**
-
-`npm install jspaste`
-
-**Yarn**
-
-`yarn add jspaste`
+_If you have issues, please join our [Discord support server](https://discord.gg/8RNAdpK)._

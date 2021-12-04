@@ -2,13 +2,8 @@
   "name": "jspaste",
   "version": "9.0.1",
   "description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
-  "main": "index.js",
-  "license": "MIT",
   "author": "tnfAngel",
-  "contributors": [
-    "Inetol <contact@inetol.net>",
-    "Aidak"
-  ],
+  "license": "MIT",
   "keywords": [
     "JSPaste",
     "hastebin",
@@ -16,19 +11,15 @@
     "tnfAngel",
     "jspaste"
   ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tnfAngel/jspaste-api.git"
   },
-  "bugs": {
-    "url": "https://github.com/tnfAngel/jspaste-api/issues"
-  },
-  "homepage": "https://jspaste.tk",
   "dependencies": {
     "axios": "^0.24.0"
-  },
-  "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
   }
 }

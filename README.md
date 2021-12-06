@@ -120,7 +120,7 @@ console.info(response);
 
 console.info(await JSP.get(response.key));
 
-console.info(info.name + ' ' + info.version + ' by ' + info.author)
+console.info(`${info.name} ${info.version} by ${info.author}`)
 ```
 
 ```js

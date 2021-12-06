@@ -1,6 +1,6 @@
 'use strict';
 
-const JSP = require('./src/methods.js');
+const { remove, check, get, publish } = require('./src/methods.js');
 const info = require('./src/misc/constants.js').info;
 
-module.exports = {JSP, info}
+module.exports = {remove, check, get, publish, info}

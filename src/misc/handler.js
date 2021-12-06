@@ -1,6 +1,6 @@
 'use strict';
 
-class ErrorHandler {
+class Handler {
     /**
      * @param e Error code output
      * @param s Error text output
@@ -13,4 +13,4 @@ class ErrorHandler {
     };
 }
 
-module.exports = {ErrorHandler};
+module.exports = {Handler};

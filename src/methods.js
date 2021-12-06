@@ -2,7 +2,7 @@
 
 const a = require('axios').default;
 const constants = require('./misc/constants.js').constants;
-const handler = require('./misc/errorHandler.js').ErrorHandler;
+const handler = require('./misc/handler.js').Handler;
 
 const invalid = ['INVALID_PARAMS_PROVIDED', '"Key" or "Secret" is invalid or missing in the parameters', 'No body provided for the document'];
 const request = ['ERROR_ON_REQUEST', 'An error occurred while making the request: '];

@@ -1,6 +1,6 @@
 {
   "name": "jspaste",
-  "version": "9.0.5",
+  "version": "9.0.6",
   "description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
   "main": "index.js",
   "license": "MIT",

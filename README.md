@@ -16,7 +16,7 @@
 
 ```js
 // ES6
-import JSP from 'jspaste';
+import * as JSP from 'jspaste';
 
 
 // CommonJS (default)

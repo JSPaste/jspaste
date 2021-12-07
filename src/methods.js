@@ -71,7 +71,7 @@ async function get(key) {
 async function publish(body) {
     if (body == null) return handler.Error(invalid[0], invalid[2]);
 
-    const r = await a.post(constants.baseURL + constants.routeURL)
+    const r = await a.post(constants.baseURL + constants.routeURL.at, body)
         .catch(e => {
             return e.response ? handler.Error(request[0], request[1] + e.response.status + e.response.data.message ? e.response.data.message : e.message) : e
         })

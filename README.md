@@ -16,11 +16,11 @@
 
 ```js
 // ES6
-import { JSP } from 'jspaste';
+import JSP from 'jspaste';
 
 
 // CommonJS (default)
-const { JSP } = require('jspaste');
+const JSP = require('jspaste');
 ```
 
 ### Methods
@@ -113,26 +113,26 @@ console.info(deleted); // true
 
 ```js
 // ES6
-import { JSP, info } from 'jspaste';
+import JSP from 'jspaste';
 
 const response = await JSP.publish('Hello world!');
 console.info(response);
 
 console.info(await JSP.get(response.key));
 
-console.info(`${info.name} ${info.version} by ${info.author}`)
+console.info(`${JSP.info.name} ${JSP.info.version} by ${JSP.info.author}`);
 ```
 
 ```js
 // CommonJS (default)
-const { JSP, info } = require('jspaste');
+const JSP = require('jspaste');
 
 const response = await JSP.publish('Hello world!');
 console.info(response);
 
 console.info(await JSP.get(response.key));
 
-console.info(info.name + ' ' + info.version + ' by ' + info.author)
+console.info(JSP.info.name + ' ' + JSP.info.version + ' by ' + JSP.info.author);
 ```
 
 _If you have any issues or want to make any suggestions, don't forget to join

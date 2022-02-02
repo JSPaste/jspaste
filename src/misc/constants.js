@@ -9,7 +9,7 @@ const info = {
     name: 'JSPaste',
     version: require('../../package.json').version,
     author: 'tnfAngel#6557',
-    web: 'https://jspaste.tk',
+    web: 'https://jspaste.ml',
     github: 'https://github.com/tnfAngel/jspaste-api',
     credits: [{
         creator: 'Inetol#0840',

@@ -1,10 +1,10 @@
-<a href="https://jspaste.tk">
-<img src="https://jspaste.tk/logo.png" alt="JSPaste Logo" width="250" height="250" align="right"/>
+<a href="https://jspaste.ml">
+<img src="https://jspaste.ml/logo.png" alt="JSPaste Logo" width="250" height="250" align="right"/>
 </a>
 
 # JSPaste
 
-- [JSPaste](https://jspaste.tk) official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.
+- [JSPaste](https://jspaste.ml) official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.
 - Lightweight module, **ES6** and **CommonJS** compatible.
 - Package developed by `tnfAngel#6557`
 
@@ -12,11 +12,11 @@
 
 ### Declare
 
-- To declare JSPaste in your code you can do it with ...
+- To declare JSPaste in your code you can do it with...
 
 ```js
 // ES6
-import * as JSP from 'jspaste';
+import JSP from 'jspaste';
 
 
 // CommonJS (default)
@@ -36,7 +36,7 @@ await JSP.publish('Hello world!').catch(console.error).then(r => {
 
     /**
      * {
-     *     url: 'https://jspaste.tk/rza',
+     *     url: 'https://jspaste.ml/rza',
      *     key: 'rza',
      *     secret: 'x5pz.22gu.r5qa.tobw'
      * }
@@ -49,7 +49,7 @@ await JSP.publish('Hello world!').catch(console.error).then(r => {
 // OR
 
 const data = await JSP.publish('Hello world!');
-console.info(data.url); // https://jspaste.tk/rza
+console.info(data.url); // https://jspaste.ml/rza
 ```
 
 ##### Get | `.get(key: string)` -> String(JSPasteDocument)

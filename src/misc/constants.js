@@ -1,7 +1,7 @@
 'use strict';
 
 const constants = {
-    baseURL: 'https://jspaste.tk',
+    baseURL: 'https://jspaste.ml',
     routeURL: '/documents/'
 };
 

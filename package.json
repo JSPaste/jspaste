@@ -1,6 +1,6 @@
 {
   "name": "jspaste",
-  "version": "9.0.9",
+  "version": "9.0.10",
   "description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
   "main": "index.js",
   "license": "GPL-3.0-only",
@@ -24,11 +24,8 @@
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
   "homepage": "https://jspaste.ml",
-  "dependencies": {
-    "axios": "^0.25.0"
-  },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=17.5.0",
+    "npm": ">=8.5.0"
   }
 }

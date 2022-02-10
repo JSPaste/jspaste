@@ -1,6 +1,5 @@
 'use strict'
 
-const a = require('axios').default
 const constants = require('./misc/constants.js').constants
 const handler = require('./misc/handler.js').Handler
 
@@ -18,7 +17,7 @@ const request = ['ERROR_ON_REQUEST', 'An error occurred while making the request
 async function remove(key, secret) {
     if ((key || secret) == null) return handler.Error(invalid[0], invalid[1])
 
-    await a.delete(constants.baseURL + constants.routeURL + key, {headers: {secret: secret}}).catch(e => {
+    await fetch(constants.baseURL + constants.routeURL + key, {method: 'DELETE', headers: ["Secret", secret]}).catch(e => {
         if (e.response) return handler.Error(request[0], request[1] + e.response.status + e.response.data.message ? e.response.data.message : e.message)
         else return e
     })
@@ -36,7 +35,7 @@ async function remove(key, secret) {
 async function check(key) {
     if (key == null) return handler.Error(invalid[0], invalid[1])
 
-    return Boolean(a.get(constants.baseURL + constants.routeURL + key).catch(() => false))
+    return Boolean(fetch(constants.baseURL + constants.routeURL + key, {method: 'GET'}).catch(() => false))
 }
 
 
@@ -49,7 +48,7 @@ async function check(key) {
 async function get(key) {
     if (key == null) return handler.Error(invalid[0], invalid[1])
 
-    const r = await a.get(constants.baseURL + constants.routeURL + key).catch(e => {
+    const r = await fetch(constants.baseURL + constants.routeURL + key, {method: 'GET'}).catch(e => {
         if (e.response) return handler.Error(request[0], request[1] + e.response.status + e.response.data.message ? e.response.data.message : e.message)
         else return e
     })
@@ -68,7 +67,7 @@ async function get(key) {
 async function publish(body) {
     if (body == null) return handler.Error(invalid[0], invalid[2])
 
-    const r = await a.post(constants.baseURL + constants.routeURL, body).catch(e => {
+    const r = await fetch(constants.baseURL + constants.routeURL, {method: 'POST', body: body}).catch(e => {
         if (e.response) return handler.Error(request[0], request[1] + e.response.status + e.response.data.message ? e.response.data.message : e.message)
         else return e
     })

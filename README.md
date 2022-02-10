@@ -36,7 +36,7 @@ await JSP.publish('Hello world!').catch(console.error).then(r => {
 
     /**
      * {
-     *     url: 'https://jspaste.ml/rza',
+     *     url: 'https://jspaste.ml/foobar',
      *     key: 'foobar',
      *     secret: 'x5pz.22gu.r5qa.tobw'
      * }
@@ -49,7 +49,7 @@ await JSP.publish('Hello world!').catch(console.error).then(r => {
 // OR
 
 const data = await JSP.publish('Hello world!');
-console.info(data.url); // https://jspaste.ml/rza
+console.info(data.url); // https://jspaste.ml/foobar
 ```
 
 ##### Get | `.get(key: string)` -> String(JSPasteDocument)

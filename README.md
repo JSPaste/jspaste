@@ -37,7 +37,7 @@ await JSP.publish('Hello world!').catch(console.error).then(r => {
     /**
      * {
      *     url: 'https://jspaste.ml/rza',
-     *     key: 'rza',
+     *     key: 'foobar',
      *     secret: 'x5pz.22gu.r5qa.tobw'
      * }
      */
@@ -57,7 +57,7 @@ console.info(data.url); // https://jspaste.ml/rza
 Gets a JSPaste document using the key ...
 
 ```js
-await JSP.get('rza').catch(console.error).then(r => {
+await JSP.get('foobar').catch(console.error).then(r => {
 
     console.info(r); // Hello world!
 
@@ -67,7 +67,7 @@ await JSP.get('rza').catch(console.error).then(r => {
 
 // OR
 
-const data = await JSP.get('rza');
+const data = await JSP.get('foobar');
 console.info(data); // Hello world!
 ```
 
@@ -76,7 +76,7 @@ console.info(data); // Hello world!
 Validate if any JSPaste document exists using that key ...
 
 ```js
-await JSP.check('rza').catch(console.error).then(r => {
+await JSP.check('foobar').catch(console.error).then(r => {
 
     console.info(r); // true
 
@@ -86,7 +86,7 @@ await JSP.check('rza').catch(console.error).then(r => {
 
 // OR
 
-const exists = await JSP.check('rza');
+const exists = await JSP.check('foobar');
 console.info(exists); // true
 ```
 
@@ -95,7 +95,7 @@ console.info(exists); // true
 Delete a JSPaste document using the key and secret ...
 
 ```js
-await JSP.remove('rza', '2ads.fdfw.32ww.fwt4').catch(console.error).then(r => {
+await JSP.remove('foobar', 'x5pz.22gu.r5qa.tobw').catch(console.error).then(r => {
 
     console.info(r); // true
 
@@ -105,7 +105,7 @@ await JSP.remove('rza', '2ads.fdfw.32ww.fwt4').catch(console.error).then(r => {
 
 // OR
 
-const deleted = await JSP.remove('rza', '2ads.fdfw.32ww.fwt4');
+const deleted = await JSP.remove('foobar', 'x5pz.22gu.r5qa.tobw');
 console.info(deleted); // true
 ```
 
@@ -132,8 +132,7 @@ console.info(response);
 
 console.info(await JSP.get(response.key));
 
-console.info(JSP.info.name + ' ' + JSP.info.version + ' by ' + JSP.info.author);
+console.info(`${JSP.info.name} ${JSP.info.version} by ${JSP.info.author}`);
 ```
 
-_If you have any issues or want to make any suggestions, don't forget to join
-our [Discord server](https://discord.gg/8RNAdpK)_
+_If you have any issues or want to make any suggestions, don't forget to join our [Discord server](https://discord.gg/8RNAdpK)_

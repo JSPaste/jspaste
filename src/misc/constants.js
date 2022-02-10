@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
 const constants = {
     baseURL: 'https://jspaste.ml',
     routeURL: '/documents/'
-};
+}
 
 const info = {
     name: 'JSPaste',
@@ -12,12 +12,12 @@ const info = {
     web: 'https://jspaste.ml',
     github: 'https://github.com/tnfAngel/jspaste-api',
     credits: [{
-        creator: 'Inetol#0840',
-        github: 'https://github.com/Inetol/jspaste-api'
+        creator: 'Inetol',
+        webpage: 'https://www.inetol.net'
     }, {
         creator: 'Aidak',
         github: 'https://github.com/Aidakkk/gopaste'
     }]
-};
+}
 
-module.exports = {constants, info};
+module.exports = {constants, info}

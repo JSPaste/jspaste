@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 class Handler {
     /**
@@ -10,7 +10,7 @@ class Handler {
 
     static Error(e, s) {
         throw new Error('[JSP Error ' + e + '] => ' + s)
-    };
+    }
 }
 
-module.exports = {Handler};
+module.exports = {Handler}

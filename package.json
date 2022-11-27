@@ -1,34 +1,78 @@
 {
   "name": "jspaste",
-  "version": "9.0.9",
-  "description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
-  "main": "index.js",
-  "license": "GPL-3.0-only",
-  "author": "tnfAngel",
-  "contributors": [
-    "Inetol <contact@inetol.net>",
-    "Aidak"
-  ],
+  "version": "10.0.0",
+  "description": "Powerful library to easily interact with JSPaste API",
   "keywords": [
-    "JSPaste",
+    "jspaste",
     "hastebin",
     "pastebin",
-    "tnfAngel",
-    "jspaste"
+    "tnfangel"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tnfAngel/jspaste-api.git"
-  },
+  "homepage": "https://jspaste.ml",
   "bugs": {
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
-  "homepage": "https://jspaste.ml",
-  "dependencies": {
-    "axios": "^0.25.0"
+  "repository": "github:tnfAngel/jspaste-api",
+  "license": "GPL-3.0",
+  "author": "tnfAngel",
+  "contributors": [
+    "Ivan Gabaldon <ivan [d0t] gab [at] inetol [d0t] net>",
+    "Aidak"
+  ],
+  "exports": "./dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "setup": "npx pnpm run populate",
+    "build": "npx pnpm run build:check && tsup --dts-resolve --minify --format esm,cjs",
+    "build:check": "tsc --noEmit",
+    "populate": "npx pnpm install",
+    "test": "npx pnpm run build:check && NODE_OPTIONS=--experimental-vm-modules jest --no-cache"
   },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "lib/**/*.ts"
+    ],
+    "coverageReporters": [
+      "json"
+    ],
+    "preset": "ts-jest",
+    "errorOnDeprecated": true,
+    "roots": [
+      "<rootDir>/test/"
+    ]
+  },
+  "dependencies": {
+    "node-fetch": "2.6.7"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.9",
+    "@types/node-fetch": "^2.6.2",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3"
+  },
+  "packageManager": "pnpm@7.17.1",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=16.13.0",
+    "npm": "use-pnpm-instead",
+    "yarn": "use-pnpm-instead"
+  },
+  "tsup": {
+    "target": "node16",
+    "entry": [
+      "lib/index.ts"
+    ],
+    "splitting": false,
+    "sourcemap": true,
+    "clean": true
   }
 }

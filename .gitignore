@@ -1,4 +1,5 @@
-node_modules/
+# Folders
 .idea/
-
-package-lock.json
+node_modules/
+dist/
+coverage/

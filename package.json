@@ -27,11 +27,14 @@
     "dist"
   ],
   "scripts": {
-    "setup": "npx pnpm run populate",
-    "build": "npx pnpm run build:check && tsup --dts-resolve --minify --format esm,cjs",
+    "setup": "npm run populate",
+    "build": "npm run build:check && tsup --dts-resolve --minify --format esm,cjs",
     "build:check": "tsc --noEmit",
+    "prepublish": "npm run prepublishOnly",
+    "prepublishOnly": "npm run test && npm run build",
+    "postpublish": "npx pnpm exec echo 'OK'",
     "populate": "npx pnpm install",
-    "test": "npx pnpm run build:check && NODE_OPTIONS=--experimental-vm-modules jest --no-cache"
+    "test": "npm run build:check && NODE_OPTIONS=--experimental-vm-modules jest --no-cache"
   },
   "jest": {
     "clearMocks": true,

@@ -1,14 +1,7 @@
-// TYPES
-// TODO: ???
-export type APIVersion = 1;
-
 // API
 export const default_api_url: string = "https://jspaste.ml/";
-export const default_api_version: APIVersion = 1;
 export const api: any = {
-    v1: {
-        documents: "/documents/",
-    }
+    documents: "/documents/"
 };
 
 // TODO: MSG
@@ -22,9 +15,7 @@ export const msg: any = {
     },
 
     warn: {
-        INVOKE: {
-            gateway_version: "This route does not exist or is currently not implemented. Switching to v" + default_api_version + "..."
-        }
+        // ...
     }
 };
 

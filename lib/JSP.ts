@@ -1,4 +1,4 @@
-import {api, APIVersion, default_api_url, default_api_version, version} from "./bank";
+import {api, default_api_url, version} from "./bank";
 import {Request} from "./Request";
 
 /**
@@ -23,8 +23,6 @@ export class JSP {
      * @type string
      */
     public static readonly version: string = version;
-    private readonly api_endpoint: any;
-    private readonly api_url: string;
 
     /**
      * JSP (AKA JSPaste) API methods
@@ -43,8 +41,7 @@ export class JSP {
          * @type any
          */
         access: async (resource: string) => {
-            // 2-2
-            const req = await new Request(this.api_url).access(resource)
+            const req = await new Request(default_api_url + api.documents).access(resource)
             const body = await req.json()
 
             // TODO: weird paths
@@ -54,38 +51,11 @@ export class JSP {
                     resource: resource,
                     valid: req.ok
                 },
-                body: {
-                    raw: await body,
-                    key: (await body).key,
-                    data: (await body).data
+                res: {
+                    raw: body,
+                    payload: body.data
                 }
             }
         }
-    };
-
-    /**
-     * Constructor de JSP (AKA JSPaste)
-     * @example
-     * const jsp = new JSP();
-     * @public
-     * @constructor
-     * @param gateway (Optional) Use a different API release from the default.
-     */
-    public constructor(gateway?: APIVersion) {
-        if (typeof gateway === "undefined") gateway = default_api_version
-
-        this.api_endpoint = this.setGateway(gateway);
-        this.api_url = default_api_url + this.api_endpoint.documents;
-    }
-
-    // TODO: is needed in this case?
-    private setGateway(gateway: APIVersion): any {
-        let api_endpoint;
-
-        // Default Gateway
-        if (gateway == 1) api_endpoint = api.v1;
-        else api_endpoint = api.v1;
-
-        return api_endpoint;
     }
 }

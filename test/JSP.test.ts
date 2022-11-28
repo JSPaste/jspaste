@@ -6,6 +6,7 @@ describe("JSP", () => {
 
         expect(x).toBeDefined();
         expect(typeof x).toBe("string")
+        console.info("JSP version detected: " + x);
     });
 
     test("# (default)", () => {
@@ -17,11 +18,14 @@ describe("JSP", () => {
 });
 
 const jsp = new JSP();
+const resource = "fxynzgtuntekaknbsovyod";
 describe("JSP#api", () => {
     test(".access()", async () => {
-        const x = await jsp.api.access("fxynzgtuntekaknbsovyod");
+        const x = await jsp.api.access(resource);
 
-        expect(x.body.data).toBeDefined();
-        expect(x.body.key).toBeDefined();
+        expect(x).toBeDefined();
+        expect(x).toBeInstanceOf(Object);
+        expect(x.req.resource).toBe(resource);
+        expect(x.req.valid).toBeTruthy();
     });
 });

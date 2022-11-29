@@ -1,4 +1,4 @@
-import {api, default_api_url, version} from "./bank";
+import {api, default_api_url, version_semver} from "./bank";
 import {Request} from "./Request";
 
 /**
@@ -22,7 +22,7 @@ export class JSP {
      * @readonly
      * @type string
      */
-    public static readonly version: string = version;
+    public static readonly version: string = version_semver;
 
     /**
      * JSP (AKA JSPaste) API methods
@@ -42,7 +42,7 @@ export class JSP {
          */
         access: async (resource: string) => {
             const req = await new Request(default_api_url + api.documents).access(resource)
-            const body = await req.json()
+            const body: any = await req.json()
 
             // TODO: weird paths
             return {

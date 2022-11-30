@@ -4,7 +4,7 @@ export {default as pkg} from "../package.json";
 // API
 export const default_api_url: string = "https://jspaste.ml/";
 export const api: any = {
-    documents: "/documents/"
+    documents: "documents/"
 };
 
 // TODO: MSG

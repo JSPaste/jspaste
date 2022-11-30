@@ -3,8 +3,7 @@ import {useragent} from "./bank";
 
 export class Request extends JSPHTTP {
     public constructor(api_url: string) {
-        let options = {
-            method: "",
+        const options = {
             headers: {
                 "User-Agent": useragent
             },
@@ -14,13 +13,6 @@ export class Request extends JSPHTTP {
         super(api_url, options);
     }
 
-    public access(api_route: string) {
-        return super.get(api_route);
-    }
-
-    /* TODO: best method in this case?
-    public post(api_route: string) {
-        return super.post(...);
-    }
-     */
+    public access = (resource: string) => super.get(resource);
+    public publish = (payload: any, resource?: string) => super.post(payload, resource);
 }

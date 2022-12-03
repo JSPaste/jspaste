@@ -1,6 +1,31 @@
 import {api, default_api_url, version_semver} from "./bank";
 import {Request} from "./Request";
 
+interface AccessResponse {
+    req: {
+        resource: string,
+        valid: boolean
+    },
+    res: {
+        raw: object
+        url: string
+        payload: string
+    }
+}
+
+interface PublishResponse {
+    req: {
+        payload: string,
+        valid: boolean
+    },
+    res: {
+        raw: object,
+        url: string
+        resource: string,
+        secret: string
+    }
+}
+
 /**
  * JSP (AKA JSPaste) Class
  * @example
@@ -31,16 +56,15 @@ export class JSP {
      * @type any
      */
     public readonly api: any = {
-        // TODO: IDE auto-completion does not work when setting Promise<object>
         /**
          * Access a previously published resource
          * @example
          * // I wish to retrieve data from the resource "foo"...
-         * new JSP().api.access("foo") // Promise<object>
+         * new JSP().api.access("foo")
          * @param resource Resource identifier
-         * @type object
+         * @type Promise<AccessResponse>
          */
-        async access(resource: string): Promise<object> {
+        async access(resource: string): Promise<AccessResponse> {
             const req = await new Request(default_api_url + api.documents).access(resource)
             const body: any = await req.json()
 
@@ -57,16 +81,15 @@ export class JSP {
             }
         },
 
-        // TODO: IDE auto-completion does not work when setting Promise<object>
         /**
          * Publish a resource in the API. Uploaded resources will not be indexable, **HOWEVER** you **MUST NOT** upload sensitive data.
          * @example
          * // I wish to upload "lots of" data temporarily...
-         * new JSP().api.publish("Lorem ipsum dolor sit amet ...") // Promise<object>
+         * new JSP().api.publish("Lorem ipsum dolor sit amet ...")
          * @param payload Data to upload
-         * @type object
+         * @type Promise<PublishResponse>
          */
-        async publish(payload: any): Promise<object> {
+        async publish(payload: any): Promise<PublishResponse> {
             const req = await new Request(default_api_url + api.documents).publish(String(payload))
             const body: any = await req.json()
 

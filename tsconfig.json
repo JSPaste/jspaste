@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noEmitOnError": true,
+    "noEmit": true,
     "useDefineForClassFields": true,
     "isolatedModules": true
   },

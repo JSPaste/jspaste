@@ -14,20 +14,13 @@
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "npm run build:check && tsup-node --dts-resolve --minify --format esm,cjs",
+    "build": "npm run build:check && tsup-node",
     "build:check": "tsc --noEmit",
     "populate": "npx pnpm install",
     "postpublish": "npx pnpm exec echo 'OK'",
@@ -94,12 +87,15 @@
   },
   "packageManager": "pnpm@7.17.1",
   "tsup": {
+    "platform": "node",
     "target": "node16",
     "entry": [
       "lib/index.ts"
     ],
+    "format": "esm",
+    "minify": true,
+    "dts": true,
     "splitting": false,
-    "sourcemap": true,
     "clean": true
   }
 }

@@ -1,6 +1,3 @@
-// package.json
-export {default as pkg} from "../package.json";
-
 // API
 export const default_api_url: string = "https://jspaste.ml/";
 export const api: any = {
@@ -21,9 +18,3 @@ export const msg: any = {
         // ...
     }
 };
-
-// OTHER
-import {pkg} from "./bank.js";
-
-export const version_semver: string = <string>pkg.version.match(/(\d+(\.\d)+)/i)![1];
-export const useragent: string = "JSPaste/" + version_semver;

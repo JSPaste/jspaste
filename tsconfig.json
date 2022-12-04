@@ -7,7 +7,6 @@
     "moduleDetection": "force",
     "target": "ES2021",
     "strict": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Node16",

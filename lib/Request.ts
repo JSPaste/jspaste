@@ -1,12 +1,11 @@
 import {JSPHTTP} from "./core/JSPHTTP.js";
-import {useragent} from "./bank.js";
 import {Response} from "node-fetch";
 
 export class Request extends JSPHTTP {
     public constructor(api_url: string) {
         const options = {
             headers: {
-                "User-Agent": useragent
+                "User-Agent": "JSPaste"
             },
             follow: 3,
         };

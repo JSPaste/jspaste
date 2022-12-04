@@ -1,4 +1,4 @@
-import {api, default_api_url, version_semver} from "./bank.js";
+import {api, default_api_url} from "./bank.js";
 import {Request} from "./Request.js";
 
 interface JSPMethods {
@@ -68,25 +68,11 @@ interface PublishResponse {
  * @example
  * // Create a JSP instance
  * const jsp = new JSP();
- *
- * // ...or access static
- * const jsp_version = JSP.version;
  * @public
  * @class
  * @type {JSP}
  */
 export class JSP {
-    /**
-     * Returns JSP (AKA JSPaste) release version
-     * @example
-     * console.info("Running on JSPaste " + JSP.version)
-     * @public
-     * @static
-     * @readonly
-     * @type {string}
-     */
-    public static readonly version: string = version_semver;
-
     /**
      * JSP (AKA JSPaste) API methods
      * @public

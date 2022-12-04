@@ -1,22 +1,5 @@
 import {JSP} from "../lib/JSP.js";
 
-describe("JSP", () => {
-    test(".version", () => {
-        const x = JSP.version;
-
-        expect(x).toBeDefined();
-        expect(typeof x).toBe("string")
-        console.info("JSP version detected: " + x);
-    });
-
-    test("# (default)", () => {
-        const x = new JSP();
-
-        expect(x).toBeDefined();
-        expect(x).toBeInstanceOf(JSP);
-    });
-});
-
 describe("JSP#api", () => {
     const jsp = new JSP();
     let resource: string;

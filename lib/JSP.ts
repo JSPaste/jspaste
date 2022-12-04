@@ -1,6 +1,11 @@
 import {api, default_api_url, version_semver} from "./bank";
 import {Request} from "./Request";
 
+interface JSPMethods {
+        access: (resource: string) => Promise<AccessResponse>,
+        publish: (payload: any) => Promise<PublishResponse>
+}
+
 interface AccessResponse {
     req: {
         resource: string,
@@ -53,9 +58,9 @@ export class JSP {
      * JSP (AKA JSPaste) API methods
      * @public
      * @readonly
-     * @type any
+     * @type JSPMethods
      */
-    public readonly api: any = {
+    public readonly api: JSPMethods = {
         /**
          * Access a previously published resource
          * @example

@@ -1,5 +1,6 @@
 import {JSPHTTP} from "./core";
 import {useragent} from "./bank";
+import {Response} from "node-fetch";
 
 export class Request extends JSPHTTP {
     public constructor(api_url: string) {
@@ -13,6 +14,6 @@ export class Request extends JSPHTTP {
         super(api_url, options);
     }
 
-    public access = (resource: string) => super.get(resource);
-    public publish = (payload: any, resource?: string) => super.post(payload, resource);
+    public access = (resource: string): Promise<Response> => super.get(resource);
+    public publish = (payload: any, resource?: string): Promise<Response> => super.post(payload, resource);
 }

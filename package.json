@@ -2,7 +2,7 @@
   "name": "jspaste",
   "version": "10.0.0",
   "description": "Powerful library to easily interact with JSPaste API",
-  "license": "GPL-3.0",
+  "license": "BSD-3-Clause-Clear",
   "author": "tnfAngel",
   "contributors": [
     "Aidak",

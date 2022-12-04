@@ -1,4 +1,4 @@
-import JSP from "../lib";
+import {JSP} from "../lib/JSP.js";
 
 describe("JSP", () => {
     test(".version", () => {

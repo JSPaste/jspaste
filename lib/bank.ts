@@ -23,7 +23,7 @@ export const msg: any = {
 };
 
 // OTHER
-import {pkg} from "./bank";
+import {pkg} from "./bank.js";
 
-export const version_semver: string = pkg.version.match(/(\d+(\.\d)+)/i)![1];
+export const version_semver: string = <string>pkg.version.match(/(\d+(\.\d)+)/i)![1];
 export const useragent: string = "JSPaste/" + version_semver;

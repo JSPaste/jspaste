@@ -1,5 +1,5 @@
-import {JSPHTTP} from "./core";
-import {useragent} from "./bank";
+import {JSPHTTP} from "./core/JSPHTTP.js";
+import {useragent} from "./bank.js";
 import {Response} from "node-fetch";
 
 export class Request extends JSPHTTP {

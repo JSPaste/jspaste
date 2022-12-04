@@ -1,4 +1,4 @@
-import {JSPError} from "../lib/core";
+import {JSPError} from "../lib/core/JSPError.js";
 
 describe("JSPError", () => {
     test("# (test error)", () => {

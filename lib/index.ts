@@ -1,1 +1,1 @@
-export {JSP as default} from "./JSP";
+export {JSP as default} from "./JSP.js";

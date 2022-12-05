@@ -13,6 +13,7 @@ export class Request extends JSPHTTP {
         super(api_url, options);
     }
 
-    public access = (resource: string): Promise<Response> => super.get(resource);
-    public publish = (payload: any, resource?: string): Promise<Response> => super.post(payload, resource);
+    public readonly access = (resource: string): Promise<Response> => super.run("GET", resource);
+    public readonly publish = (payload: any): Promise<Response> => super.run("POST", undefined, undefined, payload);
+    public readonly remove = (resource: any, secret: string): Promise<Response> => super.run("DELETE", resource, secret);
 }

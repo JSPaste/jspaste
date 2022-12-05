@@ -1,7 +1,8 @@
 import fetch from "node-fetch";
+import {TMethod} from "../bank.js";
 
 export abstract class JSPHTTP {
-    readonly #api_url;
+    #api_url;
     readonly #options;
 
     protected constructor(api_url: string, options: any) {
@@ -9,16 +10,35 @@ export abstract class JSPHTTP {
         this.#options = options;
     }
 
-    protected get(resource: string) {
-        this.#options.method = "GET"
+    protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
+        this.#options.method = method
+        this.#options.headers = {}
+        this.#options.body = ""
 
-        return fetch(this.#api_url + resource, this.#options)
-    }
+        switch (method) {
+            case "GET":
+                this.#options.body = null
 
-    protected post(payload: any, resource?: string) {
-        this.#options.method = "POST"
-        this.#options.body = payload
+                if (typeof resource !== "undefined") this.#api_url += resource
+                break
 
-        return (typeof resource === "undefined") ? fetch(this.#api_url, this.#options) : fetch(this.#api_url + resource, this.#options)
+            case "POST":
+                if (typeof payload !== "undefined") {
+                    this.#options.body += payload
+                }
+                break
+
+            case "DELETE":
+                if (typeof resource !== "undefined") this.#api_url += resource
+                if (typeof secret !== "undefined") {
+                    this.#options.headers.secret = secret
+                }
+                break
+
+            default:
+            // TODO ...
+        }
+
+        return fetch(this.#api_url, this.#options)
     }
 }

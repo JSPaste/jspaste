@@ -13,16 +13,43 @@ describe("JSP#api", () => {
         expect(x.req.valid).toBeTruthy();
         console.info(x)
 
-        resource = x.res.resource
-        secret = x.res.secret
+        resource = <string>x.res.resource
+        secret = <string>x.res.secret
     });
 
-    test(".access()", async () => {
+    test(".access() // valid", async () => {
         const x = await jsp.access(resource);
 
         expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
         expect(x.req.valid).toBeTruthy();
+        console.info(x)
+    });
+
+    test(".access() // !valid", async () => {
+        const x = await jsp.access(String("start." + (Math.floor(Math.random() * 9999) + 1000) + ".end"));
+
+        expect(x).toBeDefined();
+        expect(x).toBeInstanceOf(Object);
+        expect(x.req.valid).toBeFalsy();
+        console.info(x)
+    });
+
+    test(".remove() // valid", async () => {
+        const x = await jsp.remove(resource, secret);
+
+        expect(x).toBeDefined();
+        expect(x).toBeInstanceOf(Object);
+        expect(x.req.valid).toBeTruthy();
+        console.info(x)
+    });
+
+    test(".remove() // !valid", async () => {
+        const x = await jsp.remove(resource, String("start." + (Math.floor(Math.random() * 9999) + 1000) + ".end"));
+
+        expect(x).toBeDefined();
+        expect(x).toBeInstanceOf(Object);
+        expect(x.req.valid).toBeFalsy();
         console.info(x)
     });
 });

@@ -1,30 +1,5 @@
-import {api, default_api_url} from "./bank.js";
+import {api, default_api_url, IAccessRes, IPublishRes, IRemoveRes} from "./bank.js";
 import {Request} from "./Request.js";
-
-interface AccessResponse {
-    req: {
-        valid: boolean,
-        resource: string
-    },
-    res: {
-        raw: object,
-        url: string,
-        payload: any
-    }
-}
-
-interface PublishResponse {
-    req: {
-        valid: boolean,
-        payload: any
-    },
-    res: {
-        raw: object,
-        url: string,
-        resource: string,
-        secret: string
-    }
-}
 
 /**
  * JSP (AKA JSPaste) class
@@ -37,6 +12,41 @@ interface PublishResponse {
  */
 export class JSP {
     /**
+     * Publish a resource.
+     *
+     * *Uploaded data will not be indexable, **HOWEVER** you **MUST NOT** upload sensitive data.*
+     * @example
+     * const jsp = new JSP();
+     *
+     * // I wish to upload "lots of" data temporarily...
+     * const ack = await jsp.publish("Lorem ipsum dolor sit amet ...");
+     *
+     * // I am interested in saving this information...
+     * const resource = ack.res.resource;
+     * const secret = ack.res.secret;
+     * @async
+     * @param {any} payload Data to upload
+     * @return {Promise<IPublishRes>}
+     */
+    public async publish(payload: any): Promise<IPublishRes> {
+        const req = await new Request(default_api_url + api.documents).publish(String(payload))
+        const body: any = await req.json()
+
+        return {
+            req: {
+                valid: req.ok,
+                payload: payload,
+            },
+            res: {
+                url: default_api_url + body.key,
+                raw: body,
+                resource: body.key,
+                secret: body.secret
+            }
+        }
+    }
+
+    /**
      * Access a previously published resource
      * @example
      * const jsp = new JSP();
@@ -48,9 +58,9 @@ export class JSP {
      * const payload = ack.res.payload;
      * @async
      * @param {string} resource Resource identifier
-     * @return {Promise<AccessResponse>}
+     * @return {Promise<IAccessRes>}
      */
-    public async access(resource: string): Promise<AccessResponse> {
+    public async access(resource: string): Promise<IAccessRes> {
         const req = await new Request(default_api_url + api.documents).access(resource)
         const body: any = await req.json()
 
@@ -68,36 +78,35 @@ export class JSP {
     }
 
     /**
-     * Publish a resource.
-     *
-     * *Uploaded data will not be indexable, **HOWEVER** you **MUST NOT** upload sensitive data.*
+     * Removes a previously published resource
      * @example
      * const jsp = new JSP();
      *
-     * // I wish to upload "lots of" data temporarily...
-     * const ack = await jsp.publish("Lorem ipsum dolor sit amet ...");
+     * // I want to delete this data because I do not need it any more...
+     * const ack = await jsp.remove("foobar", "hwix.v7yn.w5bu.45yu");
      *
-     * // I am interested in saving this information...
-     * const resource = ack.res.resource;
-     * const secret = ack.res.secret;
+     * if (ack.req.valid) {
+     *     // Resource deleted :D
+     * } else {
+     *     // It failed :(
+     * }
      * @async
-     * @param {any} payload Data to upload
-     * @return {Promise<PublishResponse>}
+     * @param {string} resource Resource identifier
+     * @param {string} secret Character string returned when publishing a resource to the API
+     * @return {Promise<IRemoveRes>}
      */
-    public async publish(payload: any): Promise<PublishResponse> {
-        const req = await new Request(default_api_url + api.documents).publish(String(payload))
+    public async remove(resource: string, secret: string): Promise<IRemoveRes> {
+        const req = await new Request(default_api_url + api.documents).remove(resource, secret)
         const body: any = await req.json()
 
         return {
             req: {
                 valid: req.ok,
-                payload: payload,
+                resource: resource,
+                secret: secret
             },
             res: {
-                url: default_api_url + body.key,
-                raw: body,
-                resource: body.key,
-                secret: body.secret
+                raw: body
             }
         }
     }

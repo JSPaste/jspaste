@@ -1,5 +1,7 @@
+import {TError} from '../bank.js';
+
 export class JSPError extends Error {
-    constructor(type: string, msg: string, extra?: string) {
+    constructor(type: TError, msg: string, extra?: string) {
         if (typeof extra !== "undefined") {
             msg = msg + "\n" + extra;
         }

@@ -6,7 +6,7 @@ describe("JSP#api", () => {
     let secret: string;
 
     test(".publish()", async () => {
-        const x = await jsp.api.publish("Lorem ipsum dolor sit amet");
+        const x = await jsp.publish("Lorem ipsum dolor sit amet");
 
         expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
@@ -18,7 +18,7 @@ describe("JSP#api", () => {
     });
 
     test(".access()", async () => {
-        const x = await jsp.api.access(resource);
+        const x = await jsp.access(resource);
 
         expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);

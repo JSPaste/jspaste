@@ -1,5 +1,5 @@
-import {api, default_api_url, IAccessRes, IPublishRes, IRemoveRes} from "./bank.js";
-import {Request} from "./Request.js";
+import {api, default_api_url, IAccessRes, IPublishRes, IRemoveRes} from "./bank";
+import {Request} from "./Request";
 
 /**
  * JSP (AKA JSPaste) class
@@ -29,13 +29,13 @@ export class JSP {
      * @return {Promise<IPublishRes>}
      */
     public async publish(payload: any): Promise<IPublishRes> {
-        const req = await new Request(default_api_url + api.documents).publish(String(payload))
-        const body: any = await req.json()
+        const req = await new Request(default_api_url + api.documents).publish(String(payload));
+        const body: any = await req.json();
 
         return {
             req: {
-                valid: req.ok,
-                payload: payload,
+                valid: req.coreRes.statusMessage === "OK",
+                payload: payload
             },
             res: {
                 url: default_api_url + body.key,
@@ -61,12 +61,12 @@ export class JSP {
      * @return {Promise<IAccessRes>}
      */
     public async access(resource: string): Promise<IAccessRes> {
-        const req = await new Request(default_api_url + api.documents).access(resource)
-        const body: any = await req.json()
+        const req = await new Request(default_api_url + api.documents).access(resource);
+        const body: any = await req.json();
 
         return {
             req: {
-                valid: req.ok,
+                valid: req.coreRes.statusMessage === "OK",
                 resource: resource
             },
             res: {
@@ -96,12 +96,12 @@ export class JSP {
      * @return {Promise<IRemoveRes>}
      */
     public async remove(resource: string, secret: string): Promise<IRemoveRes> {
-        const req = await new Request(default_api_url + api.documents).remove(resource, secret)
-        const body: any = await req.json()
+        const req = await new Request(default_api_url + api.documents).remove(resource, secret);
+        const body: any = await req.json();
 
         return {
             req: {
-                valid: req.ok,
+                valid: req.coreRes.statusMessage === "OK",
                 resource: resource,
                 secret: secret
             },

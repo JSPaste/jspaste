@@ -1,44 +1,39 @@
-import fetch from "node-fetch";
-import {TMethod} from "../bank.js";
+import c from "centra";
+import {TMethod} from "../bank";
+import {JSPError} from "./JSPError";
 
 export abstract class JSPHTTP {
-    #api_url;
+    readonly #api_url;
     readonly #options;
 
-    protected constructor(api_url: string, options: any) {
+    protected constructor(api_url: string | undefined, options: any) {
+        // TODO Messages
+        if (typeof api_url === "undefined") throw new JSPError("InternalError", "api_url is undefined");
+
         this.#api_url = api_url;
         this.#options = options;
     }
 
     protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
-        this.#options.method = method
-        this.#options.headers = {}
-        this.#options.body = ""
+        if (typeof resource === "undefined") resource = "";
+        let fetch = c(this.#api_url + resource, this.#options).option("method", method);
 
         switch (method) {
             case "GET":
-                this.#options.body = null
-
-                if (typeof resource !== "undefined") this.#api_url += resource
-                break
+                break;
 
             case "POST":
-                if (typeof payload !== "undefined") {
-                    this.#options.body += payload
-                }
-                break
+                if (typeof payload !== "undefined") fetch.body(payload);
+                break;
 
             case "DELETE":
-                if (typeof resource !== "undefined") this.#api_url += resource
-                if (typeof secret !== "undefined") {
-                    this.#options.headers.secret = secret
-                }
-                break
+                if (typeof secret !== "undefined") fetch.header("secret", secret);
+                break;
 
             default:
-            // TODO ...
+            // TODO Messages
         }
 
-        return fetch(this.#api_url, this.#options)
+        return fetch.timeout(5000).compress().send();
     }
 }

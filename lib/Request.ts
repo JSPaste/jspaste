@@ -1,14 +1,13 @@
-import {JSPHTTP} from "./core/JSPHTTP.js";
-import {Response} from "node-fetch";
+import {JSPHTTP} from "./core/JSPHTTP";
+import {Response} from "centra";
 
 export class Request extends JSPHTTP {
-    public constructor(api_url: string) {
+    public constructor(api_url?: string) {
         const options = {
             headers: {
                 "User-Agent": "JSPaste"
-            },
-            follow: 3,
-        };
+            }
+        }
 
         super(api_url, options);
     }

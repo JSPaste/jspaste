@@ -1,6 +1,6 @@
 // Types
 export type TMethod = "GET" | "POST" | "DELETE";
-export type TError = "InternalError"
+export type TError = "InternalError" | "TestError";
 
 // Interfaces
 export interface IPublishRes {
@@ -9,8 +9,8 @@ export interface IPublishRes {
         payload: any
     },
     res: {
-        raw: object,
         url: string,
+        raw: any,
         resource: string | undefined,
         secret: string | undefined
     }
@@ -22,8 +22,8 @@ export interface IAccessRes {
         resource: string
     },
     res: {
-        raw: object,
         url: string,
+        raw: any,
         payload: any | undefined
     }
 }
@@ -35,18 +35,18 @@ export interface IRemoveRes {
         secret: string
     },
     res: {
-        raw: object
+        raw: any
     }
 }
 
 // API
 export const default_api_url: string = "https://jspaste.ml/";
-export const api: any = {
+export const api = {
     documents: "documents/"
 };
 
 // TODO: Messages
-export const msg: any = {
+export const msg = {
     err: {
         // ...
     },

@@ -1,2 +1,3 @@
-// noinspection JSUnusedGlobalSymbols
-export {JSP as default} from "./JSP";
+import {JSP} from "./JSP";
+
+export = JSP

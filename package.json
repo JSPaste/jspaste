@@ -14,8 +14,13 @@
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -25,7 +30,6 @@
     "prepublishOnly": "npm run test && npm run build",
     "test": "npm run build:check && jest --no-cache"
   },
-  "types": "./dist/index.d.ts",
   "dependencies": {
     "centra": "^2.6.0"
   },
@@ -71,7 +75,10 @@
     "entry": [
       "lib/index.ts"
     ],
-    "format": "esm",
+    "format": [
+      "esm",
+      "cjs"
+    ],
     "minify": true,
     "dts": true,
     "splitting": false,

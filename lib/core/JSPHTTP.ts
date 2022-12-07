@@ -1,5 +1,5 @@
 import c from "centra";
-import {TMethod} from "../bank";
+import {msg, timeout, TMethod} from "../bank";
 import {JSPError} from "./JSPError";
 
 export abstract class JSPHTTP {
@@ -7,8 +7,7 @@ export abstract class JSPHTTP {
     readonly #options;
 
     protected constructor(api_url: string | undefined, options: any) {
-        // TODO Messages
-        if (typeof api_url === "undefined") throw new JSPError("InternalError", "api_url is undefined");
+        if (typeof api_url === "undefined") throw new JSPError("InternalError", msg.err.INTERNAL, msg.err.INTERNAL_EXTRA);
 
         this.#api_url = api_url;
         this.#options = options;
@@ -31,9 +30,11 @@ export abstract class JSPHTTP {
                 break;
 
             default:
-            // TODO Messages
+                throw new JSPError("InternalError", msg.err.INTERNAL, msg.err.INTERNAL_EXTRA);
         }
 
-        return fetch.timeout(5000).compress().send();
+        return fetch.timeout(timeout).compress().send().catch((err) => {
+            throw new JSPError("APIError", err, msg.err.API_TIMEOUT_EXTRA);
+        });
     }
 }

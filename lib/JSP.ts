@@ -1,5 +1,7 @@
-import {api, default_api_url, IAccessRes, IPublishRes, IRemoveRes} from "./bank";
+import {api, api_route, IAccessRes, IPublishRes, IRemoveRes, msg} from "./bank";
 import {Request} from "./Request";
+import {Response} from "centra";
+import {JSPError} from "./core/JSPError";
 
 /**
  * JSP (AKA JSPaste) class
@@ -29,16 +31,16 @@ export class JSP {
      * @return {Promise<IPublishRes>}
      */
     public async publish(payload: any): Promise<IPublishRes> {
-        const req = await new Request(default_api_url + api.documents).publish(String(payload));
-        const body: any = await req.json();
+        const res = await this.customs(new Request(api + api_route.documents).publish(String(payload)));
+        const body: any = await res.json();
 
         return {
             req: {
-                valid: req.coreRes.statusMessage === "OK",
+                valid: res.coreRes.statusMessage === "OK",
                 payload: payload
             },
             res: {
-                url: default_api_url + body.key,
+                url: api + body.key,
                 raw: body,
                 resource: body.key,
                 secret: body.secret
@@ -61,16 +63,16 @@ export class JSP {
      * @return {Promise<IAccessRes>}
      */
     public async access(resource: string): Promise<IAccessRes> {
-        const req = await new Request(default_api_url + api.documents).access(resource);
-        const body: any = await req.json();
+        const res = await this.customs(new Request(api + api_route.documents).access(resource));
+        const body: any = await res.json();
 
         return {
             req: {
-                valid: req.coreRes.statusMessage === "OK",
+                valid: res.coreRes.statusMessage === "OK",
                 resource: resource
             },
             res: {
-                url: default_api_url + resource,
+                url: api + resource,
                 raw: body,
                 payload: body.data
             }
@@ -96,12 +98,12 @@ export class JSP {
      * @return {Promise<IRemoveRes>}
      */
     public async remove(resource: string, secret: string): Promise<IRemoveRes> {
-        const req = await new Request(default_api_url + api.documents).remove(resource, secret);
-        const body: any = await req.json();
+        const res = await this.customs(new Request(api + api_route.documents).remove(resource, secret));
+        const body: any = await res.json();
 
         return {
             req: {
-                valid: req.coreRes.statusMessage === "OK",
+                valid: res.coreRes.statusMessage === "OK",
                 resource: resource,
                 secret: secret
             },
@@ -109,5 +111,17 @@ export class JSP {
                 raw: body
             }
         }
+    }
+
+    private async customs(responsePromise: Promise<Response>): Promise<Response> {
+        const response = await responsePromise;
+
+        try {
+            JSON.parse(await response.text())
+        } catch (e) {
+            throw new JSPError("APIError", msg.err.API_INVALID_RESPONSE, msg.err.API_INVALID_RESPONSE_EXTRA);
+        }
+
+        return response;
     }
 }

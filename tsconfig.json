@@ -3,7 +3,7 @@
     "lib": [
       "ES2021"
     ],
-    "module": "Node16",
+    "module": "CommonJS",
     "moduleDetection": "force",
     "target": "ES2021",
     "strict": true,

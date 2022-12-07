@@ -40,7 +40,7 @@ export interface IRemoveRes {
 }
 
 // API
-export const api: string = "https://jspaste.ml/";
+export const api = "https://jspaste.ml/";
 export const api_route = {
     documents: "documents/"
 };

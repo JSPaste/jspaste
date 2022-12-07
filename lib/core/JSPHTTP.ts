@@ -15,7 +15,7 @@ export abstract class JSPHTTP {
 
     protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
         if (typeof resource === "undefined") resource = "";
-        let fetch = c(this.#api_url + resource, this.#options).option("method", method);
+        const fetch = c(this.#api_url + resource, this.#options).option("method", method);
 
         switch (method) {
             case "GET":

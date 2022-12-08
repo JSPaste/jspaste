@@ -1,3 +1,3 @@
 import {JSP} from "./JSP";
 
-export = JSP
+export = JSP;

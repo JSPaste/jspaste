@@ -88,9 +88,9 @@ export class JSP {
      * const ack = await jsp.remove("foobar", "hwix.v7yn.w5bu.45yu");
      *
      * if (ack.req.valid) {
-     *     // Resource deleted :D
+     *     // Resource deleted successfully!
      * } else {
-     *     // It failed :(
+     *     // It failed...
      * }
      * @async
      * @param {string} resource Resource identifier

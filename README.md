@@ -1,138 +1,56 @@
-<a href="https://jspaste.ml">
-<img src="https://jspaste.ml/logo.png" alt="JSPaste Logo" width="250" height="250" align="right"/>
-</a>
+<div align="center">
+<a href="https://jspaste.ml/"><img alt="JSPaste" height="300" src="https://static.geo.inetol.net/media/jspaste.avif"/></a>
 
-# JSPaste
+[![](https://flat.badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
+[![](https://flat.badgen.net/npm/dt/jspaste)](https://www.npmjs.com/package/jspaste)
+[![](https://flat.badgen.net/packagephobia/install/jspaste)](https://bundlephobia.com/package/jspaste)
 
-- [JSPaste](https://jspaste.ml) official API wrapper for **NodeJS**. Publish, get, and remove documents with ease.
-- Lightweight module, **ES6** and **CommonJS** compatible.
-- Package developed by `tnfAngel#6557`
+#### Powerful library to easily interact with JSPaste API
 
-## Docs
+</div>
 
-### Declare
+## Features
 
-- To declare JSPaste in your code you can do it with...
+🔸 **Tough as nails;** Built with TypeScript in mind, you can rely on it not giving you trouble when you need it most. \
+🔸 **Light as a feather;** Uses just [ONE](https://wikipedia.org/wiki/1) ultra-lightweight dependency. \
+🔸 **Easy to use;** Gives you back what you need when you need it. Period. \
+🔸 **Seamlessly compatible;** We support [ESModules](https://nodejs.org/api/esm.html#modules-ecmascript-modules) and
+prehistoric [CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules) alike.
 
-```js
-// ES6
-import JSP from 'jspaste';
+## Install
 
+With [**npm**](https://github.com/npm/cli):
 
-// CommonJS (default)
-const JSP = require('jspaste');
+```
+$ npm i --save jspaste
 ```
 
-### Methods
+With [**pnpm**](https://github.com/pnpm/pnpm):
 
-##### Publish | `.publish(body: string)` -> Object(ResponseData)
-
-Publish a document to JSPaste ...
-
-```js
-await JSP.publish('Hello world!').catch(console.error).then(r => {
-
-    console.info(r);
-
-    /**
-     * {
-     *     url: 'https://jspaste.ml/foobar',
-     *     key: 'foobar',
-     *     secret: 'x5pz.22gu.r5qa.tobw'
-     * }
-     */
-
-    // ... Other code ... //
-
-});
-
-// OR
-
-const data = await JSP.publish('Hello world!');
-console.info(data.url); // https://jspaste.ml/foobar
+```
+$ pnpm add jspaste
 ```
 
-##### Get | `.get(key: string)` -> String(JSPasteDocument)
+With [**yarn**](https://github.com/yarnpkg/berry):
 
-Gets a JSPaste document using the key ...
-
-```js
-await JSP.get('foobar').catch(console.error).then(r => {
-
-    console.info(r); // Hello world!
-
-    // ... Other code ... //
-
-});
-
-// OR
-
-const data = await JSP.get('foobar');
-console.info(data); // Hello world!
+```
+$ yarn add jspaste
 ```
 
-##### Check | `.check(key: string)` -> Boolean(JSPasteDocument)
+## Get started
 
-Validate if any JSPaste document exists using that key ...
+Start building something awesome straight from your IDE, or if you prefer having all the documentation on a separate
+book, have a look at our [documentation](https://paka.dev/npm/jspaste).
 
-```js
-await JSP.check('foobar').catch(console.error).then(r => {
-
-    console.info(r); // true
-
-    // ... Other code ... //
-
-});
-
-// OR
-
-const exists = await JSP.check('foobar');
-console.info(exists); // true
-```
-
-##### Remove | `.remove(key: string, secret: string)` -> Boolean(DeleteState)
-
-Delete a JSPaste document using the key and secret ...
+### Example
 
 ```js
-await JSP.remove('foobar', 'x5pz.22gu.r5qa.tobw').catch(console.error).then(r => {
-
-    console.info(r); // true
-
-    // ... Other code ... //
-
-});
-
-// OR
-
-const deleted = await JSP.remove('foobar', 'x5pz.22gu.r5qa.tobw');
-console.info(deleted); // true
-```
-
-## Example
-
-```js
-// ES6
-import JSP from 'jspaste';
-
-const response = await JSP.publish('Hello world!');
-console.info(response);
-
-console.info(await JSP.get(response.key));
-
-console.info(`${JSP.info.name} ${JSP.info.version} by ${JSP.info.author}`);
+import JSP from "jspaste"; // ESModules
+const JSP = require("jspaste"); // CommonJS
 ```
 
 ```js
-// CommonJS (default)
-const JSP = require('jspaste');
+// ...
 
-const response = await JSP.publish('Hello world!');
-console.info(response);
-
-console.info(await JSP.get(response.key));
-
-console.info(`${JSP.info.name} ${JSP.info.version} by ${JSP.info.author}`);
+new JSP().access("ujcbfrryaqoclfea").then(console.info);
 ```
-
-_If you have any issues or want to make any suggestions, don't forget to join our [Discord server](https://discord.gg/8RNAdpK)_

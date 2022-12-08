@@ -1,34 +1,104 @@
 {
   "name": "jspaste",
-  "version": "9.0.9",
-  "description": "JSPaste official API wrapper for NodeJS. Publish, get, and remove documents with ease.",
-  "main": "index.js",
-  "license": "GPL-3.0-only",
+  "version": "10.0.0",
+  "description": "Powerful library to easily interact with JSPaste API",
+  "license": "BSD-3-Clause-Clear",
   "author": "tnfAngel",
   "contributors": [
-    "Inetol <contact@inetol.net>",
-    "Aidak"
+    "Aidak",
+    "Ivan Gabaldon <ivan [d0t] gab [at] inetol [d0t] net>"
   ],
-  "keywords": [
-    "JSPaste",
-    "hastebin",
-    "pastebin",
-    "tnfAngel",
-    "jspaste"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tnfAngel/jspaste-api.git"
-  },
+  "homepage": "https://jspaste.ml",
+  "repository": "github:tnfAngel/jspaste-api",
   "bugs": {
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
-  "homepage": "https://jspaste.ml",
-  "dependencies": {
-    "axios": "^0.25.0"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
   },
+  "main": ".dist/index.cjs",
+  "module": ".dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run build:check && tsup-node",
+    "build:check": "tsc",
+    "prepublishOnly": "npm run test && npm run build",
+    "test": "npm run build:check && jest --no-cache"
+  },
+  "types": ".dist/index.d.ts",
+  "dependencies": {
+    "centra": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/centra": "^2.2.0",
+    "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.11",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.0",
+    "eslint": "^8.29.0",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
+  },
+  "keywords": [
+    "hastebin",
+    "jspaste",
+    "pastebin",
+    "tnfangel"
+  ],
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=16.13.0",
+    "pnpm": "use-npm-instead",
+    "yarn": "use-npm-instead"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "root": true
+  },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "lib/**/*.ts"
+    ],
+    "coverageReporters": [
+      "json"
+    ],
+    "errorOnDeprecated": true,
+    "preset": "ts-jest",
+    "roots": [
+      "<rootDir>/test/"
+    ],
+    "testTimeout": 60000
+  },
+  "tsup": {
+    "platform": "node",
+    "target": "node16",
+    "entry": [
+      "lib/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "minify": true,
+    "dts": true,
+    "splitting": false,
+    "clean": true
   }
 }

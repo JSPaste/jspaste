@@ -14,6 +14,13 @@
     "url": "https://github.com/tnfAngel/jspaste-api/issues"
   },
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "files": [
@@ -44,10 +51,10 @@
   },
   "keywords": [
     "api",
-    "node",
     "hastebin",
     "javascript",
     "jspaste",
+    "node",
     "paste",
     "pastebin",
     "promise",

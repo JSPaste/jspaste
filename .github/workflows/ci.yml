@@ -5,9 +5,9 @@ on:
   pull_request:
     branches: [ rolling ]
     paths-ignore:
-      - '*.md'
-      - '.gitattributes'
-      - '.gitignore'
+      - "*.md"
+      - ".gitattributes"
+      - ".gitignore"
 
 permissions:
   actions: read
@@ -19,7 +19,8 @@ jobs:
     name: "Test with Node v${{ matrix.node }}"
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 1
+      # TODO: Check this
+      #max-parallel: 1
       fail-fast: false
       matrix:
         node: [ 16.x, 18.x ]
@@ -39,7 +40,7 @@ jobs:
       - name: Cheking tests...
         run: npm run test
 
-      - if: always() && github.repository_owner == 'jspaste'
+      - if: always() && github.repository_owner == "jspaste"
         name: Saving coverage...
         uses: actions/upload-artifact@v3
         with:
@@ -51,7 +52,7 @@ jobs:
     name: Analysis
     runs-on: ubuntu-latest
 
-    if: github.repository_owner == 'jspaste'
+    if: github.repository_owner == "jspaste"
     steps:
       - uses: actions/checkout@v3
 
@@ -61,18 +62,6 @@ jobs:
           languages: javascript
           queries: security-extended,security-and-quality
 
-      - name: Warming up (node)
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: npm
-
-      - name: Warming up (deps)
-        run: npm ci
-
-      - name: Building...
-        run: npm run build
-
       - name: Analysing code...
         uses: github/codeql-action/analyze@v2
 
@@ -81,7 +70,7 @@ jobs:
     needs: [ test, analyse ]
     runs-on: ubuntu-latest
 
-    if: always() && github.repository_owner == 'jspaste'
+    if: always() && github.repository_owner == "jspaste"
     steps:
       - uses: actions/checkout@v3
 

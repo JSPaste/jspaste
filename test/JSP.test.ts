@@ -1,4 +1,4 @@
-import {JSP} from "../lib/JSP";
+import JSP from "../lib";
 
 jest.retryTimes(3, {logErrorsBeforeRetry: true});
 describe("JSP#", () => {

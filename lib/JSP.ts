@@ -12,7 +12,7 @@ import {Request} from "./Request";
  * console.info(await jsp.access("foo"));
  * jsp.access("foobar").then(x => { ... });
  */
-export class JSP {
+export default class JSP {
     /**
      * Publish "something" to the API (E.g. server logs, error dumps or configs which need to be backed up temporarily in the cloud for later access)
      *
@@ -29,7 +29,6 @@ export class JSP {
      * // > I am interested in printing this onto the terminal
      * console.info({ ack.res.url, ack.res.resource, ack.res.secret });
      * @param {any} payload Data to upload
-     * @return {Promise<IPublishRes>}
      */
     public async publish(payload: any): Promise<IPublishRes> {
         const res = await new Request(api + api_route.documents).publish(String(payload));
@@ -64,7 +63,6 @@ export class JSP {
      * // > I am interested in printing this onto the terminal
      * console.info({ ack.res.payload });
      * @param {string} resource Resource identifier
-     * @return {Promise<IAccessRes>}
      */
     public async access(resource: string): Promise<IAccessRes> {
         const res = await new Request(api + api_route.documents).access(resource);
@@ -96,7 +94,6 @@ export class JSP {
      * else console.info("Resource removal failed.");
      * @param {string} resource Resource identifier
      * @param {string} secret Owner key which verifies the ownership of a "resource" in the API
-     * @return {Promise<IRemoveRes>}
      */
     public async remove(resource: string, secret: string): Promise<IRemoveRes> {
         const res = await new Request(api + api_route.documents).remove(resource, secret);

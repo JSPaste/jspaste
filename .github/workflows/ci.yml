@@ -82,7 +82,6 @@ jobs:
     runs-on: ubuntu-latest
 
     if: always() && github.repository_owner == 'jspaste'
-    # && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v3
 
@@ -94,5 +93,4 @@ jobs:
       - name: Report to Codecov...
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage-final.json

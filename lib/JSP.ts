@@ -2,29 +2,32 @@ import {api, api_route, IAccessRes, IPublishRes, IRemoveRes} from "./bank";
 import {Request} from "./Request";
 
 /**
- * JSP (AKA JSPaste) class
+ * JSPaste main class, all magic resides here ✨
  * @example
- * // Create a JSP instance
+ * // > Initialize an instance each time
+ * new JSP().access("foo").then(console.info);
+ *
+ * // > Initialize an instance and keep it
  * const jsp = new JSP();
- * @public
- * @class
- * @type {JSP}
+ * console.info(await jsp.access("foo"));
+ * jsp.access("foobar").then(x => { ... });
  */
 export class JSP {
     /**
-     * Publish a resource.
+     * Publish "something" to the API (E.g. server logs, error dumps or configs which need to be backed up temporarily in the cloud for later access)
      *
-     * *Uploaded data will not be indexable, **HOWEVER** you **MUST NOT** upload sensitive data.*
+     * _Uploaded data will not be indexable, **HOWEVER** you **MUST NOT** upload sensitive information_
      * @example
-     * const jsp = new JSP();
+     * // I want to upload a stack trace for later debugging...
+     * const ack = await new JSP().publish(err);
      *
-     * // I wish to upload "lots of" data temporarily...
-     * const ack = await jsp.publish("Lorem ipsum dolor sit amet ...");
-     *
-     * // I am interested in saving this information...
+     * // > I am interested in saving it in variables
+     * const url = ack.res.url;
      * const resource = ack.res.resource;
      * const secret = ack.res.secret;
-     * @async
+     *
+     * // > I am interested in printing this onto the terminal
+     * console.info({ ack.res.url, ack.res.resource, ack.res.secret });
      * @param {any} payload Data to upload
      * @return {Promise<IPublishRes>}
      */
@@ -47,16 +50,19 @@ export class JSP {
     }
 
     /**
-     * Access a previously published resource
+     * Retrieves the content of a previously published resource
+     *
+     * _You need to know the "resource identifier" in order to access it in the API_
      * @example
-     * const jsp = new JSP();
+     * // I want to access the "foo" resource...
+     * const ack = await new JSP().access("foo");
      *
-     * // I wish to retrieve data from the resource "foo"...
-     * const ack = await jsp.access("foobar");
-     *
-     * // I keep the obtained information...
+     * // > I am interested in saving it in variables
+     * const url = ack.res.url;
      * const payload = ack.res.payload;
-     * @async
+     *
+     * // > I am interested in printing this onto the terminal
+     * console.info({ ack.res.payload });
      * @param {string} resource Resource identifier
      * @return {Promise<IAccessRes>}
      */
@@ -78,21 +84,18 @@ export class JSP {
     }
 
     /**
-     * Removes a previously published resource
+     * Removes the content of a previously published resource
+     *
+     * _You need to know the "resource identifier" and the "secret" in order to remove it from the API_
      * @example
-     * const jsp = new JSP();
+     * // I want to remove the "foo" resource using the "bar" secret...
+     * const ack = await new JSP().remove("foo", "bar");
      *
-     * // I want to delete this data because I do not need it any more...
-     * const ack = await jsp.remove("foobar", "hwix.v7yn.w5bu.45yu");
-     *
-     * if (ack.req.valid) {
-     *     // Resource deleted successfully!
-     * } else {
-     *     // It failed...
-     * }
-     * @async
+     * // I check if the resource has been successfully removed...
+     * if (ack.req.valid) console.info("Resource removed successfully!");
+     * else console.info("Resource removal failed.");
      * @param {string} resource Resource identifier
-     * @param {string} secret Character string returned when publishing a resource to the API
+     * @param {string} secret Owner key which verifies the ownership of a "resource" in the API
      * @return {Promise<IRemoveRes>}
      */
     public async remove(resource: string, secret: string): Promise<IRemoveRes> {

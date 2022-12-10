@@ -55,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Warming up... (CodeQL)
+      - name: Warming up (CodeQL)
         uses: github/codeql-action/init@v2
         with:
           languages: javascript
@@ -64,7 +64,7 @@ jobs:
       - name: Warming up (node)
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16.x
           cache: npm
 
       - name: Warming up (deps)
@@ -81,7 +81,8 @@ jobs:
     needs: [ test, analyse ]
     runs-on: ubuntu-latest
 
-    if: always() && github.repository_owner == 'jspaste' && github.event_name != 'pull_request'
+    if: always() && github.repository_owner == 'jspaste'
+    # && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v3
 

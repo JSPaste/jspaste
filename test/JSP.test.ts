@@ -1,11 +1,12 @@
 import {JSP} from "../lib/JSP";
 
+jest.retryTimes(3, {logErrorsBeforeRetry: true});
 describe("JSP#", () => {
     const jsp = new JSP();
     let resource: string;
     let secret: string;
 
-    test("publish()", async () => {
+    test(".publish()", async () => {
         const x = await jsp.publish("Lorem ipsum dolor sit amet");
 
         expect(x).toBeDefined();
@@ -17,7 +18,7 @@ describe("JSP#", () => {
         secret = <string>x.res.secret
     });
 
-    test("access() -> valid", async () => {
+    test(".access() -> valid", async () => {
         const x = await jsp.access(resource);
 
         expect(x).toBeDefined();
@@ -26,8 +27,8 @@ describe("JSP#", () => {
         console.debug(x)
     });
 
-    test("access() -> invalid", async () => {
-        const x = await jsp.access(String(".invalid."));
+    test(".access() -> invalid", async () => {
+        const x = await jsp.access(".invalid.");
 
         expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
@@ -35,7 +36,7 @@ describe("JSP#", () => {
         console.debug(x)
     });
 
-    test("remove() -> valid", async () => {
+    test(".remove() -> valid", async () => {
         const x = await jsp.remove(resource, secret);
 
         expect(x).toBeDefined();
@@ -44,8 +45,8 @@ describe("JSP#", () => {
         console.debug(x)
     });
 
-    test("remove() -> invalid", async () => {
-        const x = await jsp.remove(resource, String(".invalid."));
+    test(".remove() -> invalid", async () => {
+        const x = await jsp.remove(resource, ".invalid.");
 
         expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);

@@ -3,7 +3,8 @@
 
 [![](https://flat.badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
 [![](https://flat.badgen.net/npm/dt/jspaste)](https://www.npmjs.com/package/jspaste)
-[![](https://flat.badgen.net/packagephobia/install/jspaste)](https://bundlephobia.com/package/jspaste)
+[![](https://flat.badgen.net/packagephobia/install/jspaste)](https://packagephobia.com/result?p=jspaste)
+[![](https://flat.badgen.net/bundlephobia/minzip/jspaste)](https://bundlephobia.com/package/jspaste)
 
 #### Powerful library to easily interact with JSPaste API
 

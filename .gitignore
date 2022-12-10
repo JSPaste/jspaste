@@ -1,5 +1,35 @@
-# Folders
-.idea/
+# Packages
 node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dotenv
+.env
+
+# Dist
 dist/
+
+# Miscellaneous
+.tmp/
+.vscode/
+.idea/
+.DS_Store
+.turbo
+tsconfig.tsbuildinfo
 coverage/
+
+# yarn
+.pnp.*
+.yarn/
+
+# Cache
+.prettiercache
+.eslintcache

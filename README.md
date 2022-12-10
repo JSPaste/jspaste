@@ -3,11 +3,11 @@
 
 [![](https://flat.badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
 [![](https://flat.badgen.net/npm/dt/jspaste)](https://www.npmjs.com/package/jspaste)
+[![](https://badgen.net/codecov/c/github/jspaste/jspaste/rolling)](https://app.codecov.io/gh/jspaste/jspaste)
 [![](https://flat.badgen.net/packagephobia/install/jspaste)](https://packagephobia.com/result?p=jspaste)
 [![](https://flat.badgen.net/bundlephobia/minzip/jspaste)](https://bundlephobia.com/package/jspaste)
 
-#### Powerful library to easily interact with JSPaste API
-
+<h4>Powerful library to easily interact with JSPaste API</h4>
 </div>
 
 ## Features
@@ -45,13 +45,18 @@ book, have a look at our [documentation](https://paka.dev/npm/jspaste).
 
 ### Example
 
-```js
-import JSP from "jspaste"; // ESModules
-const JSP = require("jspaste"); // CommonJS
-```
+With [**ESModules**](https://nodejs.org/api/esm.html#modules-ecmascript-modules)
 
 ```js
-// ...
+import JSP from "jspaste";
+
+new JSP().access("ujcbfrryaqoclfea").then(console.info);
+```
+
+With [**CommonJS**](https://nodejs.org/api/modules.html#modules-commonjs-modules)
+
+```js
+const JSP = require("jspaste");
 
 new JSP().access("ujcbfrryaqoclfea").then(console.info);
 ```

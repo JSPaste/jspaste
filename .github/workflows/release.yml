@@ -24,8 +24,7 @@ jobs:
       - name: Set version...
         run: npm version "${{ github.event.release.tag_name }}" --git-tag-version false
 
-      - name: Building & Publishing!
-        # TODO: remove --dry-run
-        run: npm publish --tag latest --dry-run
+      - name: Build and Publish!
+        run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

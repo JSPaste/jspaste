@@ -1,6 +1,6 @@
 {
   "name": "jspaste",
-  "//": "TODO: Remove private when CI works correctly",
+  "//": "TODO: Remove private when CI works correctly [.]",
   "private": "true",
   "version": "10.0.2",
   "description": "Powerful library to easily interact with JSPaste API",

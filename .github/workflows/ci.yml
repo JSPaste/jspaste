@@ -61,6 +61,15 @@ jobs:
           languages: javascript
           queries: security-extended,security-and-quality
 
+      - name: Warming up (node)
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Warming up (deps)
+        run: npm ci
+
       - name: Building...
         run: npm run build
 

@@ -27,9 +27,6 @@ export abstract class JSPHTTP {
             case "DELETE":
                 if (secret) fetch.header("secret", secret);
                 break;
-
-            default:
-                throw new JSPError("InternalError", msg.err.INTERNAL, msg.err.INTERNAL_EXTRA);
         }
 
         return fetch.timeout(timeout).compress().send().catch((err) => {

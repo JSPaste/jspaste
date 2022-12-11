@@ -63,7 +63,7 @@ jobs:
 
   coverage:
     name: Upload coverage
-    needs: [ test, analyse ]
+    needs: [ test ]
     runs-on: ubuntu-latest
 
     if: always() && github.repository_owner == 'jspaste'

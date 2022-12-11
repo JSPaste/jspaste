@@ -32,7 +32,6 @@ export default class JSP {
      */
     public async publish(payload: any): Promise<IPublishRes> {
         const res = await new Request(api + api_route.documents).publish(String(payload));
-        const body = await res.json();
 
         return {
             req: {
@@ -40,10 +39,10 @@ export default class JSP {
                 payload: payload
             },
             res: {
-                url: api + body.key,
-                raw: body,
-                resource: body.key,
-                secret: body.secret
+                url: api + res.body.key,
+                raw: res.body,
+                resource: res.body.key,
+                secret: res.body.secret
             }
         }
     }
@@ -66,7 +65,6 @@ export default class JSP {
      */
     public async access(resource: string): Promise<IAccessRes> {
         const res = await new Request(api + api_route.documents).access(resource);
-        const body = await res.json();
 
         return {
             req: {
@@ -75,8 +73,8 @@ export default class JSP {
             },
             res: {
                 url: api + resource,
-                raw: body,
-                payload: body.data
+                raw: res.body,
+                payload: res.body.data
             }
         }
     }
@@ -97,7 +95,6 @@ export default class JSP {
      */
     public async remove(resource: string, secret: string): Promise<IRemoveRes> {
         const res = await new Request(api + api_route.documents).remove(resource, secret);
-        const body = await res.json();
 
         return {
             req: {
@@ -106,7 +103,7 @@ export default class JSP {
                 secret: secret
             },
             res: {
-                raw: body
+                raw: res.body
             }
         }
     }

@@ -9,8 +9,9 @@ describe("JSP#", () => {
     test(".publish()", async () => {
         const x = await jsp.publish("Lorem ipsum dolor sit amet");
 
-        expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
+        expect(x.res.resource).toBeDefined();
+        expect(x.res.secret).toBeDefined();
         expect(x.req.valid).toBeTruthy();
         console.debug(x)
 
@@ -21,8 +22,8 @@ describe("JSP#", () => {
     test(".access() -> valid", async () => {
         const x = await jsp.access(resource);
 
-        expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
+        expect(x.res.payload).toBeDefined();
         expect(x.req.valid).toBeTruthy();
         console.debug(x)
     });
@@ -30,8 +31,8 @@ describe("JSP#", () => {
     test(".access() -> invalid", async () => {
         const x = await jsp.access(".invalid.");
 
-        expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
+        expect(x.res.payload).toBeUndefined();
         expect(x.req.valid).toBeFalsy();
         console.debug(x)
     });
@@ -39,7 +40,6 @@ describe("JSP#", () => {
     test(".remove() -> valid", async () => {
         const x = await jsp.remove(resource, secret);
 
-        expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
         expect(x.req.valid).toBeTruthy();
         console.debug(x)
@@ -48,7 +48,6 @@ describe("JSP#", () => {
     test(".remove() -> invalid", async () => {
         const x = await jsp.remove(resource, ".invalid.");
 
-        expect(x).toBeDefined();
         expect(x).toBeInstanceOf(Object);
         expect(x.req.valid).toBeFalsy();
         console.debug(x)

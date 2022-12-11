@@ -45,6 +45,7 @@ export const api_route = {
     documents: "documents/"
 };
 
+// Other
 export const msg = {
     err: {
         "INTERNAL": "Don't worry, it's not your fault.",
@@ -52,16 +53,6 @@ export const msg = {
         "API_TIMEOUT_EXTRA": "The server is not responding and we can't hold the door open any longer, which is why you are seeing this message. Your connection to the server \"may\" not be stable, or the server \"may\" be busy or down at the moment.",
         "API_INVALID_RESPONSE": "We are unable to process your request right now. Try again later.",
         "API_INVALID_RESPONSE_EXTRA": "We HAVE received a response from the server, but it is not what we expected. It is \"possible\" that the server has triggered protection against your IP being temporarily blocked."
-    },
-
-    info: {
-        // ...
-    },
-
-    warn: {
-        // ...
     }
 };
-
-// Other
 export const timeout = 7000

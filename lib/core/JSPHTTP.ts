@@ -7,26 +7,25 @@ export abstract class JSPHTTP {
     readonly #options;
 
     protected constructor(api_url: string | undefined, options: any) {
-        if (typeof api_url === "undefined") throw new JSPError("InternalError", msg.err.INTERNAL, msg.err.INTERNAL_EXTRA);
+        if (!api_url) throw new JSPError("InternalError", msg.err.INTERNAL, msg.err.INTERNAL_EXTRA);
 
         this.#api_url = api_url;
         this.#options = options;
     }
 
     protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
-        if (typeof resource === "undefined") resource = "";
-        const fetch = c(this.#api_url + resource, this.#options).option("method", method);
+        const fetch = c(this.#api_url + (resource ? resource : ""), this.#options).option("method", method);
 
         switch (method) {
             case "GET":
                 break;
 
             case "POST":
-                if (typeof payload !== "undefined") fetch.body(payload);
+                if (payload) fetch.body(payload);
                 break;
 
             case "DELETE":
-                if (typeof secret !== "undefined") fetch.header("secret", secret);
+                if (secret) fetch.header("secret", secret);
                 break;
 
             default:

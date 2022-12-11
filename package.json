@@ -32,7 +32,7 @@
     "prepublishOnly": "npm run test && npm run build",
     "test": "npm run build:check && jest --no-cache"
   },
-  "sideEffects": false,
+  "sideEffects": true,
   "types": "./dist/index.d.ts",
   "dependencies": {
     "centra": "^2.6.0"

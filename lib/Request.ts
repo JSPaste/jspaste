@@ -14,19 +14,20 @@ export class Request extends JSPHTTP {
         super(api_url, options);
     }
 
-    public readonly publish = (payload: any): Promise<Response> => this.customs(super.run("POST", undefined, undefined, payload));
-    public readonly access = (resource: string): Promise<Response> => this.customs(super.run("GET", resource));
-    public readonly remove = (resource: string, secret: string): Promise<Response> => this.customs(super.run("DELETE", resource, secret));
+    public readonly publish = (payload: any) => this.customs(super.run("POST", undefined, undefined, payload));
+    public readonly access = (resource: string) => this.customs(super.run("GET", resource));
+    public readonly remove = (resource: string, secret: string) => this.customs(super.run("DELETE", resource, secret));
 
-    private async customs(responsePromise: Promise<Response>): Promise<Response> {
+    private async customs(responsePromise: Promise<Response>) {
         const response = await responsePromise;
 
-        try {
-            JSON.parse(await response.text())
-        } catch (e) {
+        await response.json().catch(() => {
             throw new JSPError("APIError", msg.err.API_INVALID_RESPONSE, msg.err.API_INVALID_RESPONSE_EXTRA);
-        }
+        })
 
-        return response;
+        return {
+            ...response,
+            body: await response.json()
+        }
     }
 }

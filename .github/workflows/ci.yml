@@ -5,9 +5,9 @@ on:
   pull_request:
     branches: [ rolling ]
     paths-ignore:
-      - '*.md'
-      - '.gitattributes'
-      - '.gitignore'
+      - "*.md"
+      - ".gitattributes"
+      - ".gitignore"
 
 permissions:
   actions: read
@@ -19,7 +19,6 @@ jobs:
     name: "Test with Node v${{ matrix.node }}"
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 1
       fail-fast: false
       matrix:
         node: [ 16.x, 18.x ]
@@ -61,24 +60,12 @@ jobs:
           languages: javascript
           queries: security-extended,security-and-quality
 
-      - name: Warming up (node)
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: npm
-
-      - name: Warming up (deps)
-        run: npm ci
-
-      - name: Building...
-        run: npm run build
-
       - name: Analysing code...
         uses: github/codeql-action/analyze@v2
 
   coverage:
     name: Upload coverage
-    needs: [ test, analyse ]
+    needs: [ test ]
     runs-on: ubuntu-latest
 
     if: always() && github.repository_owner == 'jspaste'

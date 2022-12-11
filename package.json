@@ -1,6 +1,6 @@
 {
   "name": "jspaste",
-  "version": "10.0.2",
+  "version": "0.0.0",
   "description": "Powerful library to easily interact with JSPaste API",
   "license": "BSD-3-Clause-Clear",
   "author": "tnfAngel",
@@ -32,7 +32,7 @@
     "prepublishOnly": "npm run test && npm run build",
     "test": "npm run build:check && jest --no-cache"
   },
-  "sideEffects": false,
+  "sideEffects": true,
   "types": "./dist/index.d.ts",
   "dependencies": {
     "centra": "^2.6.0"
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@types/centra": "^2.2.0",
     "@types/jest": "^29.2.4",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.11.13",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
     "eslint": "^8.29.0",
@@ -89,7 +89,7 @@
     "roots": [
       "<rootDir>/test/"
     ],
-    "testTimeout": 60000
+    "testTimeout": 7000
   },
   "tsup": {
     "platform": "node",

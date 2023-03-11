@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://jspaste.ml/"><img alt="JSPaste" height="300" src="https://static.geo.inetol.net/media/jspaste.avif"/></a>
+<a href="https://jspaste.tnfangel.xyz/"><img alt="JSPaste" height="300" src="https://static.geo.inetol.net/media/jspaste.avif"/></a>
 
 [![](https://flat.badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
 [![](https://flat.badgen.net/npm/dt/jspaste)](https://www.npmjs.com/package/jspaste)
@@ -48,15 +48,15 @@ book, have a look at our [documentation](https://paka.dev/npm/jspaste).
 With [**ESModules**](https://nodejs.org/api/esm.html#modules-ecmascript-modules):
 
 ```js
-import JSP from "jspaste";
+import JSP from 'jspaste';
 
-new JSP().access("ujcbfrryaqoclfea").then(console.info);
+new JSP().access('ujcbfrryaqoclfea').then(console.info);
 ```
 
 With [**CommonJS**](https://nodejs.org/api/modules.html#modules-commonjs-modules):
 
 ```js
-const JSP = require("jspaste");
+const JSP = require('jspaste');
 
-new JSP().access("ujcbfrryaqoclfea").then(console.info);
+new JSP().access('ujcbfrryaqoclfea').then(console.info);
 ```

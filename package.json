@@ -19,7 +19,7 @@
     "build": "npm run build:check && tsup-node",
     "build:check": "tsc",
     "prepublishOnly": "npm run test && npm run build",
-    "test": "npm run build:check && jest --no-cache"
+    "test": "npm run build:check && bun test --bail=3 --timeout=10000 --todo --coverage"
   },
   "sideEffects": true,
   "devDependencies": {

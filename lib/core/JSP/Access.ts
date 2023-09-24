@@ -1,5 +1,5 @@
 import Request from "../Request.ts";
-import {api} from "../static/api/v1.ts";
+import {api} from "../../static/api/v1.ts";
 import {URL} from "url";
 
 export default async function access(resource: string): Promise<IAccessRes> {

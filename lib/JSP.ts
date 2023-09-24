@@ -1,6 +1,6 @@
-import access from "./jsp/Access.ts";
-import publish from "./jsp/Publish.ts";
-import remove from "./jsp/Remove.ts";
+import access from "./core/JSP/Access.ts";
+import publish from "./core/JSP/Publish.ts";
+import remove from "./core/JSP/Remove.ts";
 
 /**
  * JSPaste main class, all magic resides here ✨

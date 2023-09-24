@@ -1,5 +1,5 @@
 import Request from "../Request.ts";
-import {api} from "../static/api/v1.ts";
+import {api} from "../../static/api/v1.ts";
 
 export default async function remove(resource: string, secret: string): Promise<IRemoveRes> {
     const response = await new Request("DELETE", api.route.documents).remove(resource, secret);
@@ -11,7 +11,6 @@ export default async function remove(resource: string, secret: string): Promise<
             secret: secret
         },
         res: {
-            // TODO: Discover API response structure
             raw: response.raw
         }
     }

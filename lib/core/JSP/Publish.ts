@@ -1,5 +1,5 @@
 import Request from "../Request.ts";
-import {api} from "../static/api/v1.ts";
+import {api} from "../../static/api/v1.ts";
 
 export default async function publish(payload: any): Promise<IPublishRes> {
     const response = await new Request("POST", api.route.documents).publish(String(payload));

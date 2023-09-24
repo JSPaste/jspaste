@@ -1,6 +1,6 @@
-import {api} from "./static/api/v1.ts";
+import {api} from "../static/api/v1.ts";
 import JSPError from "./JSPError.ts";
-import {error} from "./static/messages.ts";
+import {error} from "../static/messages.ts";
 
 export default class Request {
     readonly #endpoint;

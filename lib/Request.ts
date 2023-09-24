@@ -1,9 +1,43 @@
-import {JSPHTTP} from "./core/JSPHTTP";
-import {Response} from "centra";
-import {JSPError} from "./core/JSPError";
-import {msg} from "./bank";
+import c, {Response} from "centra";
+import JSPError from "./JSPError.ts";
+import {error} from "./static/messages.ts";
 
-export class Request extends JSPHTTP {
+const timeout = 7000;
+
+abstract class JSPHTTP {
+    readonly #api_url;
+    readonly #options;
+
+    protected constructor(api_url: string | undefined, options: any) {
+        if (!api_url) throw new JSPError("InternalError", error.INTERNAL, error.INTERNAL_EXTRA);
+
+        this.#api_url = api_url;
+        this.#options = options;
+    }
+
+    protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
+        const fetch = c(this.#api_url + (resource ?? ""), this.#options).option("method", method);
+
+        switch (method) {
+            case "GET":
+                break;
+
+            case "POST":
+                if (payload) fetch.body(payload);
+                break;
+
+            case "DELETE":
+                if (secret) fetch.header("secret", secret);
+                break;
+        }
+
+        return fetch.timeout(timeout).compress().send().catch((err) => {
+            throw new JSPError("APIError", err, error.API_TIMEOUT_EXTRA);
+        });
+    }
+}
+
+export default class Request extends JSPHTTP {
     public constructor(api_url?: string) {
         const options = {
             headers: {
@@ -22,7 +56,7 @@ export class Request extends JSPHTTP {
         const response = await responsePromise;
 
         await response.json().catch(() => {
-            throw new JSPError("APIError", msg.err.API_INVALID_RESPONSE, msg.err.API_INVALID_RESPONSE_EXTRA);
+            throw new JSPError("APIError", error.API_INVALID_RESPONSE, error.API_INVALID_RESPONSE_EXTRA);
         })
 
         return {
@@ -31,3 +65,5 @@ export class Request extends JSPHTTP {
         }
     }
 }
+
+export type TMethod = 'GET' | 'POST' | 'DELETE';

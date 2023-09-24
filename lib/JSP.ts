@@ -1,5 +1,6 @@
-import {api, api_route, IAccessRes, IPublishRes, IRemoveRes} from "./bank";
-import {Request} from "./Request";
+import access from "./jsp/Access.ts";
+import publish from "./jsp/Publish.ts";
+import remove from "./jsp/Remove.ts";
 
 /**
  * JSPaste main class, all magic resides here ✨
@@ -30,22 +31,7 @@ export default class JSP {
      * console.info({ ack.res.url, ack.res.resource, ack.res.secret });
      * @param {any} payload Data to upload
      */
-    public async publish(payload: any): Promise<IPublishRes> {
-        const res = await new Request(api + api_route.documents).publish(String(payload));
-
-        return {
-            req: {
-                valid: res.coreRes.statusMessage === "OK",
-                payload: payload
-            },
-            res: {
-                url: api + res.body.key,
-                raw: res.body,
-                resource: res.body.key,
-                secret: res.body.secret
-            }
-        }
-    }
+    publish = (payload: any) => publish(payload);
 
     /**
      * Retrieves the content of a previously published resource
@@ -63,21 +49,7 @@ export default class JSP {
      * console.info({ ack.res.payload });
      * @param {string} resource Resource identifier
      */
-    public async access(resource: string): Promise<IAccessRes> {
-        const res = await new Request(api + api_route.documents).access(resource);
-
-        return {
-            req: {
-                valid: res.coreRes.statusMessage === "OK",
-                resource: resource
-            },
-            res: {
-                url: api + resource,
-                raw: res.body,
-                payload: res.body.data
-            }
-        }
-    }
+    access = (resource: string) => access(resource);
 
     /**
      * Removes the content of a previously published resource
@@ -93,18 +65,5 @@ export default class JSP {
      * @param {string} resource Resource identifier
      * @param {string} secret Owner key which verifies the ownership of a "resource" in the API
      */
-    public async remove(resource: string, secret: string): Promise<IRemoveRes> {
-        const res = await new Request(api + api_route.documents).remove(resource, secret);
-
-        return {
-            req: {
-                valid: res.coreRes.statusMessage === "OK",
-                resource: resource,
-                secret: secret
-            },
-            res: {
-                raw: res.body
-            }
-        }
-    }
+    remove = (resource: string, secret: string) => remove(resource, secret);
 }

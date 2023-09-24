@@ -1,6 +1,4 @@
-import {TError} from '../bank';
-
-export class JSPError extends Error {
+export default class JSPError extends Error {
     constructor(type: TError, msg: string, extra?: string) {
         if (extra) msg += "\n* " + extra;
 
@@ -8,3 +6,5 @@ export class JSPError extends Error {
         this.name = "JSP" + type;
     }
 }
+
+type TError = 'InternalError' | 'APIError' | 'TestError';

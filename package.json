@@ -2,30 +2,19 @@
   "name": "jspaste",
   "version": "0.0.0",
   "description": "Powerful library to easily interact with JSPaste API",
-  "license": "BSD-3-Clause-Clear",
+  "license": "MIT",
   "author": "tnfAngel",
   "contributors": [
     "Aidak",
-    "Ivan Gabaldon <ivan [d0t] gab [at] inetol [d0t] net>"
+    "Ivan Gabaldon <git[at]inetol.net>"
   ],
   "homepage": "https://jspaste.tnfangel.xyz",
   "repository": "github:jspaste/jspaste",
   "bugs": {
     "url": "https://github.com/jspaste/jspaste/issues"
   },
+  "module": "index.ts",
   "type": "module",
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "npm run build:check && tsup-node",
     "build:check": "tsc",
@@ -33,77 +22,21 @@
     "test": "npm run build:check && jest --no-cache"
   },
   "sideEffects": true,
-  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "bun-types": "latest",
+    "@types/centra": "^2.2.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.2.2"
+  },
   "dependencies": {
     "centra": "^2.6.0"
   },
-  "devDependencies": {
-    "@types/centra": "^2.2.0",
-    "@types/jest": "^29.4.0",
-    "@types/node": "^18.15.0",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
-    "eslint": "^8.36.0",
-    "jest": "^29.5.0",
-    "ts-jest": "^29.0.5",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
-  },
   "keywords": [
-    "api",
     "hastebin",
-    "javascript",
     "jspaste",
-    "node",
     "paste",
     "pastebin",
-    "promise",
-    "tnfangel",
-    "typescript"
-  ],
-  "engines": {
-    "node": ">=16.13.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "root": true
-  },
-  "jest": {
-    "clearMocks": true,
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "lib/**/*.ts"
-    ],
-    "coverageReporters": [
-      "json"
-    ],
-    "errorOnDeprecated": true,
-    "preset": "ts-jest",
-    "roots": [
-      "<rootDir>/test/"
-    ],
-    "testTimeout": 7000
-  },
-  "tsup": {
-    "platform": "node",
-    "target": "node16",
-    "entry": [
-      "lib/index.ts"
-    ],
-    "format": [
-      "esm",
-      "cjs"
-    ],
-    "minify": true,
-    "dts": true,
-    "splitting": false,
-    "clean": true
-  }
+    "tnfangel"
+  ]
 }

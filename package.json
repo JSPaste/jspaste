@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/jspaste/jspaste/issues"
   },
-  "module": "index.ts",
+  "module": "lib/index.ts",
   "type": "module",
   "scripts": {
     "build": "npm run build:check && tsup-node",
@@ -23,14 +23,10 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "bun-types": "latest",
-    "@types/centra": "^2.2.1"
+    "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "centra": "^2.6.0"
   },
   "keywords": [
     "hastebin",

@@ -2,18 +2,19 @@ import Request from "../Request.ts";
 import {api} from "../static/api/v1.ts";
 
 export default async function publish(payload: any): Promise<IPublishRes> {
-    const res = await new Request(api.url + api.route.documents).publish(String(payload));
+    const response = await new Request("POST", api.route.documents).publish(String(payload));
 
     return {
         req: {
-            valid: res.coreRes.statusMessage === "OK",
+            valid: response.raw.ok,
             payload: payload
         },
         res: {
-            url: api.url + res.body.key,
-            raw: res.body,
-            resource: res.body.key,
-            secret: res.body.secret
+            // TODO: Breaking change: string to URL
+            url: new URL(api.url + response.api.key),
+            raw: response.raw,
+            resource: response.api.key,
+            secret: response.api.secret
         }
     }
 }
@@ -24,8 +25,8 @@ export interface IPublishRes {
         payload: any;
     };
     res: {
-        url: string;
-        raw: any;
+        url: URL;
+        raw: Response;
         resource: string | undefined;
         secret: string | undefined;
     };

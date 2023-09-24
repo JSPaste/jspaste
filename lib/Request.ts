@@ -1,68 +1,57 @@
-import c, {Response} from "centra";
+import {api} from "./static/api/v1.ts";
 import JSPError from "./JSPError.ts";
 import {error} from "./static/messages.ts";
 
-const timeout = 7000;
+export default class Request {
+    readonly #endpoint;
+    readonly #method;
+    readonly #headers: any;
 
-abstract class JSPHTTP {
-    readonly #api_url;
-    readonly #options;
-
-    protected constructor(api_url: string | undefined, options: any) {
-        if (!api_url) throw new JSPError("InternalError", error.INTERNAL, error.INTERNAL_EXTRA);
-
-        this.#api_url = api_url;
-        this.#options = options;
+    constructor(method: TMethod, route?: string) {
+        this.#endpoint = api.url + (route ?? "");
+        this.#method = method;
+        this.#headers = {"User-Agent": "JSPaste"};
     }
 
-    protected run(method: TMethod, resource?: string, secret?: string, payload?: any) {
-        const fetch = c(this.#api_url + (resource ?? ""), this.#options).option("method", method);
-
-        switch (method) {
-            case "GET":
-                break;
-
-            case "POST":
-                if (payload) fetch.body(payload);
-                break;
-
-            case "DELETE":
-                if (secret) fetch.header("secret", secret);
-                break;
-        }
-
-        return fetch.timeout(timeout).compress().send().catch((err) => {
-            throw new JSPError("APIError", err, error.API_TIMEOUT_EXTRA);
-        });
-    }
-}
-
-export default class Request extends JSPHTTP {
-    public constructor(api_url?: string) {
+    access(resource: string) {
         const options = {
-            headers: {
-                "User-Agent": "JSPaste"
-            }
-        }
+            method: this.#method,
+            headers: this.#headers,
+        };
 
-        super(api_url, options);
+        return this.run(this.#endpoint + resource, options)
     }
 
-    public readonly publish = (payload: any) => this.customs(super.run("POST", undefined, undefined, payload));
-    public readonly access = (resource: string) => this.customs(super.run("GET", resource));
-    public readonly remove = (resource: string, secret: string) => this.customs(super.run("DELETE", resource, secret));
+    publish(payload: any) {
+        const options = {
+            method: this.#method,
+            body: payload,
+            headers: this.#headers,
+        };
 
-    private async customs(responsePromise: Promise<Response>) {
-        const response = await responsePromise;
+        return this.run(this.#endpoint, options)
+    }
 
-        await response.json().catch(() => {
-            throw new JSPError("APIError", error.API_INVALID_RESPONSE, error.API_INVALID_RESPONSE_EXTRA);
+    remove(resource: string, secret: string) {
+        this.#headers["secret"] = secret;
+
+        const options = {
+            method: this.#method,
+            headers: this.#headers,
+        };
+
+        return this.run(this.#endpoint + resource, options)
+    }
+
+    private async run(url: string, options: any) {
+        const response = await fetch(url, options).catch((err) => {
+            throw new JSPError("APIError", err, error.API_TIMEOUT_EXTRA);
         })
 
         return {
-            ...response,
-            body: await response.json()
-        }
+            raw: response,
+            api: await response.json(),
+        };
     }
 }
 

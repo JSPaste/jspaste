@@ -1,18 +1,20 @@
 import Request from "../Request.ts";
 import {api} from "../static/api/v1.ts";
+import {URL} from "url";
 
 export default async function access(resource: string): Promise<IAccessRes> {
-    const res = await new Request(api.url + api.route.documents).access(resource);
+    const response = await new Request("GET", api.route.documents).access(resource);
 
     return {
         req: {
-            valid: res.coreRes.statusMessage === "OK",
+            valid: response.raw.ok,
             resource: resource
         },
         res: {
-            url: api.url + resource,
-            raw: res.body,
-            payload: res.body.data
+            // TODO: Breaking change: string to URL
+            url: new URL(api.url + resource),
+            raw: response.raw,
+            payload: response.api.data
         }
     }
 }
@@ -23,8 +25,8 @@ export interface IAccessRes {
         resource: string;
     };
     res: {
-        url: string;
-        raw: any;
+        url: URL;
+        raw: Response;
         payload: any | undefined;
     };
 }

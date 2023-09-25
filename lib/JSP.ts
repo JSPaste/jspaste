@@ -1,6 +1,8 @@
 import access from "./core/JSP/Access.ts";
 import publish from "./core/JSP/Publish.ts";
 import remove from "./core/JSP/Remove.ts";
+import JSPError from "./core/JSPError.ts";
+import {error} from "./static/messages.ts";
 
 /**
  * JSPaste main class, all magic resides here ✨
@@ -14,6 +16,18 @@ import remove from "./core/JSP/Remove.ts";
  * jsp.access("foobar").then(x => { ... });
  */
 export default class JSP {
+    constructor() {
+        //const require = createRequire(import.meta.url);
+
+        if (parseFloat(process.versions.node) < 18) {
+            try {
+                globalThis.fetch = require("undici").fetch;
+            } catch {
+                throw new JSPError("MissingPackage", error.PACKAGE_MISSING)
+            }
+        }
+    }
+
     /**
      * Publish "something" to the API (E.g. server logs, error dumps or configs which need to be backed up temporarily in the cloud for later access)
      *

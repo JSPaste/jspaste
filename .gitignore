@@ -25,6 +25,7 @@ dist/
 .turbo
 tsconfig.tsbuildinfo
 coverage/
+__coverage__/
 
 # npm
 package-lock.json

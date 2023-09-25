@@ -7,4 +7,4 @@ export default class JSPError extends Error {
     }
 }
 
-type TError = 'InternalError' | 'APIError' | 'TestError';
+type TError = "MissingPackage" | 'InternalError' | 'APIError' | 'TestError';

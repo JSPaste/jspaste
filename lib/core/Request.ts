@@ -1,6 +1,5 @@
 import {api} from "../static/api/v1.ts";
 import JSPError from "./JSPError.ts";
-import {error} from "../static/messages.ts";
 
 export default class Request {
     readonly #endpoint;
@@ -10,7 +9,7 @@ export default class Request {
     constructor(method: TMethod, route?: string) {
         this.#endpoint = api.url + (route ?? "");
         this.#method = method;
-        this.#headers = {} //{"User-Agent": "JSPaste"};
+        this.#headers = {"User-Agent": "JSPaste"};
     }
 
     access(resource: string) {
@@ -44,20 +43,16 @@ export default class Request {
     }
 
     private async run(url: string, options: any) {
-        const response = await fetch(url, options).catch((err) => {
-            throw new JSPError("APIError", err, error.API_TIMEOUT_EXTRA);
-        })
+        try {
+            const response = await fetch(url, options)
 
-        // TODO: Remove debug
-        console.debug("[///] START")
-        console.debug(await response.text())
-        console.debug("[///] END")
-
-        return {
-            raw: response,
-            // TODO: Catch non-JSON responses
-            api: await response.json(),
-        };
+            return {
+                raw: response,
+                api: response.headers.get("Content-Type")?.includes("application/json") ? await response.json() : {}
+            }
+        } catch (err) {
+            throw new JSPError("APIError", err);
+        }
     }
 }
 

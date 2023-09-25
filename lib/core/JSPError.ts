@@ -1,5 +1,5 @@
 export default class JSPError extends Error {
-    constructor(type: TError, msg: string, extra?: string) {
+    constructor(type: TError, msg: any, extra?: string) {
         if (extra) msg += "\n* " + extra;
 
         super(msg);

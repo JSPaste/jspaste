@@ -5,7 +5,6 @@ import JSP from "../lib/JSP.ts";
 import JSPdist from "../dist/index.js";
 
 describe("JSP#", () => {
-    7
     const jsp = new JSP();
     let resource: string;
     let secret: string;

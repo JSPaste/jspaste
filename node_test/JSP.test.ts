@@ -1,8 +1,8 @@
-import {describe, expect, test} from "bun:test";
+import {describe, expect, test} from "@jest/globals";
 // @ts-ignore
 import PureJSP from "../lib/JSP.ts";
 // @ts-ignore
-import DistJSP from "../dist/index.js";
+// import DistJSP from "../dist/index.js";
 
 describe("pure JSP#", () => {
     const jsp = new PureJSP();
@@ -57,6 +57,7 @@ describe("pure JSP#", () => {
     });
 });
 
+/*
 describe("dist JSP#", () => {
     const jsp = new DistJSP();
     let resource: string;
@@ -109,3 +110,4 @@ describe("dist JSP#", () => {
         console.debug(x)
     });
 });
+*/

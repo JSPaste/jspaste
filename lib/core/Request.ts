@@ -1,6 +1,8 @@
 import {api} from "../static/api/v1.ts";
 import JSPError from "./JSPError.ts";
 import {error} from "../static/messages.ts";
+// TODO: Test NodeJS runtimes
+//import { fetch } from "undici"
 
 export default class Request {
     readonly #endpoint;

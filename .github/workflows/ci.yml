@@ -1,5 +1,6 @@
 name: ci
 on:
+  workflow_dispatch:
   push:
     branches: [ rolling ]
   pull_request:
@@ -16,12 +17,28 @@ permissions:
 
 jobs:
   test:
+    name: "Test with Bun $(bun --version)"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Warming up (bun)
+        uses: oven-sh/setup-bun@v1
+
+      - name: Warming up (deps)
+        run: bun i
+
+      - name: Cheking tests... (bun)
+        run: bun run test
+
+  node-test:
     name: "Test with Node v${{ matrix.node }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        node: [ 16.x, 18.x ]
+        node: [ 14.x, 16.x, 18.x, 20.x ]
 
     steps:
       - uses: actions/checkout@v4
@@ -35,8 +52,8 @@ jobs:
       - name: Warming up (deps)
         run: npm ci
 
-      - name: Cheking tests...
-        run: npm run test
+      - name: Cheking tests... (node)
+        run: npm run node:test
 
       - if: always() && github.repository_owner == 'jspaste' && ${{ matrix.node }} == '18.x'
         name: Report to Codecov...

@@ -27,6 +27,6 @@ export interface IAccessRes {
     res: {
         url: URL;
         raw: Response;
-        payload: any | undefined;
+        payload: any;
     };
 }

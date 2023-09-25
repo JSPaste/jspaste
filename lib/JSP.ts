@@ -19,6 +19,8 @@ export default class JSP {
     constructor() {
         if (parseFloat(process.versions.node) < 18) {
             try {
+                // TODO: Remove debug
+                console.debug("[///] Using undici")
                 globalThis.fetch = require("undici").fetch;
             } catch {
                 throw new JSPError("MissingPackage", error.PACKAGE_MISSING)

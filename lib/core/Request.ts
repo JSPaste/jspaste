@@ -48,6 +48,11 @@ export default class Request {
             throw new JSPError("APIError", err, error.API_TIMEOUT_EXTRA);
         })
 
+        // TODO: Remove debug
+        console.debug("[///] START")
+        console.debug(await response.text())
+        console.debug("[///] END")
+
         return {
             raw: response,
             api: await response.json(),

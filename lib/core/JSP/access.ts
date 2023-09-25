@@ -1,7 +1,7 @@
 import Request from "../Request.ts";
 import {api} from "../../static/api/v1.ts";
 
-export default async function access(resource: string): Promise<IAccessRes> {
+export default async function access(resource: string): Promise<IAccessResponse> {
     const response = await new Request("GET", api.route.documents).access(resource);
 
     return {
@@ -17,7 +17,7 @@ export default async function access(resource: string): Promise<IAccessRes> {
     }
 }
 
-export interface IAccessRes {
+export interface IAccessResponse {
     req: {
         valid: boolean;
         resource: string;

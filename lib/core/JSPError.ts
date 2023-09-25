@@ -1,10 +1,10 @@
 export default class JSPError extends Error {
-    constructor(type: TError, msg: any, extra?: string) {
-        if (extra) msg += "\n* " + extra;
+    constructor(type: TError, err: any, description?: string) {
+        if (description) err += "\n* " + description;
 
-        super(msg);
+        super(err);
         this.name = "JSP" + type;
     }
 }
 
-type TError = "MissingPackage" | 'InternalError' | 'APIError' | 'TestError';
+type TError = "InternalError" | "APIError";

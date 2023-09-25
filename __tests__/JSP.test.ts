@@ -1,11 +1,12 @@
 import {describe, expect, test} from "bun:test";
 // @ts-ignore
-import PureJSP from "../lib/JSP.ts";
+import JSP from "../lib/JSP.ts";
 // @ts-ignore
-import DistJSP from "../dist/index.js";
+import JSPdist from "../dist/index.js";
 
-describe("pure JSP#", () => {
-    const jsp = new PureJSP();
+describe("JSP#", () => {
+    7
+    const jsp = new JSP();
     let resource: string;
     let secret: string;
 
@@ -58,7 +59,7 @@ describe("pure JSP#", () => {
 });
 
 describe("dist JSP#", () => {
-    const jsp = new DistJSP();
+    const jsp = new JSPdist();
     let resource: string;
     let secret: string;
 

@@ -1,7 +1,7 @@
 import Request from "../Request.ts";
 import {api} from "../../static/api/v1.ts";
 
-export default async function publish(payload: any): Promise<IPublishRes> {
+export default async function publish(payload: any): Promise<IPublishResponse> {
     const response = await new Request("POST", api.route.documents).publish(String(payload));
 
     return {
@@ -18,7 +18,7 @@ export default async function publish(payload: any): Promise<IPublishRes> {
     }
 }
 
-export interface IPublishRes {
+export interface IPublishResponse {
     req: {
         valid: boolean;
         payload: any;

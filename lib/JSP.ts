@@ -1,6 +1,6 @@
-import access from "./core/JSP/Access.ts";
-import publish from "./core/JSP/Publish.ts";
-import remove from "./core/JSP/Remove.ts";
+import access from "./core/JSP/access.ts";
+import publish from "./core/JSP/publish.ts";
+import remove from "./core/JSP/remove.ts";
 import JSPError from "./core/JSPError.ts";
 import {error} from "./static/messages.ts";
 
@@ -21,7 +21,7 @@ export default class JSP {
             try {
                 globalThis.fetch = require("undici").fetch;
             } catch {
-                throw new JSPError("MissingPackage", error.PACKAGE_MISSING)
+                throw new JSPError("InternalError", undefined, error.PACKAGE_UNDICI_MISSING)
             }
         }
     }

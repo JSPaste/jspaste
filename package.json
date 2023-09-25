@@ -22,12 +22,12 @@
   ],
   "sideEffects": true,
   "type": "module",
-  "module": "./dist/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "bun run build:check && bun build ./lib/index.ts --outdir ./dist --target node --minify ",
+    "build": "bun run build:check && bun build lib/index.ts --outdir dist --target node --minify ",
     "build:check": "tsc",
     "node:test": "npm run build:check && cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache",
     "prepublishOnly": "bun run test && bun run build",

@@ -1,4 +1,4 @@
-name: ci
+name: CI
 on:
   workflow_dispatch:
   push:
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   test:
-    name: "Test with Bun $(bun --version)"
+    name: "Test with Bun"
     runs-on: ubuntu-latest
 
     steps:
@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [ 18.x, 20.x ]
+        node: [ 16.x, 18.x, 20.x ]
 
     steps:
       - uses: actions/checkout@v4
@@ -54,7 +54,18 @@ jobs:
       - name: Warming up (deps)
         run: bun i
 
-      - name: Cheking tests... (node)
+      - if: ${{ matrix.node == '16.x' }}
+        name: Warming up (special-deps)
+        run: bun i undici
+
+      - if: ${{ matrix.node != '16.x' }}
+        name: Cheking tests... (node)
+        run: bun run node:test
+
+      # Cloudflare WAF triggers with "undici" and GitHub Runners
+      - if: ${{ matrix.node == '16.x' }}
+        name: Cheking tests... (special-node)
+        continue-on-error: true
         run: bun run node:test
 
       - if: ${{ always() && github.repository_owner == 'jspaste' && matrix.node == '20.x' }}

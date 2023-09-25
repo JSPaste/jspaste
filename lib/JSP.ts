@@ -17,8 +17,6 @@ import {error} from "./static/messages.ts";
  */
 export default class JSP {
     constructor() {
-        //const require = createRequire(import.meta.url);
-
         if (parseFloat(process.versions.node) < 18) {
             try {
                 globalThis.fetch = require("undici").fetch;

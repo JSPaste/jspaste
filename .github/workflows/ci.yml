@@ -54,6 +54,10 @@ jobs:
       - name: Warming up (deps)
         run: bun i
 
+      - if: ${{ matrix.node }} == '16.x'
+        name: Warming up (special-deps)
+        run: bun i undici
+
       - name: Cheking tests... (node)
         run: bun run node:test
 

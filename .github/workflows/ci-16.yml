@@ -1,0 +1,43 @@
+name: ci
+on:
+  workflow_dispatch:
+  push:
+    branches: [ rolling ]
+  pull_request:
+    branches: [ rolling ]
+    paths-ignore:
+      - "*.md"
+      - ".gitattributes"
+      - ".gitignore"
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  node-test:
+    name: "Test with Node v16.x"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Warming up (bun)
+        uses: oven-sh/setup-bun@v1
+
+      - name: Warming up (node)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Warming up (deps)
+        run: bun i
+
+      - name: Warming up (special-deps)
+        run: bun i undici
+
+      # Cloudflare WAF triggers a lot with "undici" and GitHub Runners
+      - name: Cheking tests... (special-node)
+        continue-on-error: true
+        run: bun run node:test

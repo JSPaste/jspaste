@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [ 16.x, 18.x, 20.x ]
+        node: [ 18.x, 20.x ]
 
     steps:
       - uses: actions/checkout@v4
@@ -54,22 +54,10 @@ jobs:
       - name: Warming up (deps)
         run: bun i
 
-      - if: ${{ matrix.node }} == '16.x'
-        continue-on-error: true
-        name: Warming up (special-deps)
-        run: bun i undici
-
-      - if: ${{ matrix.node }} != '16.x'
-        name: Cheking tests... (node)
+      - name: Cheking tests... (node)
         run: bun run node:test
 
-      # Cloudflare WAF triggers a lot with "undici" and GitHub Runners
-      - if: ${{ matrix.node }} == '16.x'
-        name: Cheking tests... (special-node)
-        continue-on-error: true
-        run: bun run node:test
-
-      - if: always() && github.repository_owner == 'jspaste' && ${{ matrix.node }} == '20.x'
+      - if: ${{ always() && github.repository_owner == 'jspaste' && matrix.node == '20.x' }}
         name: Report to Codecov...
         uses: codecov/codecov-action@v3
         with:

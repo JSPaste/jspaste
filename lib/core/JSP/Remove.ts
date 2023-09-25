@@ -23,6 +23,6 @@ export interface IRemoveRes {
         secret: string;
     };
     res: {
-        raw: any;
+        raw: Response;
     };
 }

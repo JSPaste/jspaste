@@ -10,8 +10,7 @@ export default async function publish(payload: any): Promise<IPublishRes> {
             payload: payload
         },
         res: {
-            // TODO: Breaking change: string to URL
-            url: new URL(api.url + response.api.key),
+            url: response.api.key ? new URL(api.url + response.api.key) : null,
             raw: response.raw,
             resource: response.api.key,
             secret: response.api.secret
@@ -25,9 +24,9 @@ export interface IPublishRes {
         payload: any;
     };
     res: {
-        url: URL;
+        url: URL | null;
         raw: Response;
-        resource: string | undefined;
-        secret: string | undefined;
+        resource: string | null;
+        secret: string | null;
     };
 }

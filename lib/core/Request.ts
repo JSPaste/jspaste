@@ -10,7 +10,7 @@ export default class Request {
     constructor(method: TMethod, route?: string) {
         this.#endpoint = api.url + (route ?? "");
         this.#method = method;
-        this.#headers = {"User-Agent": "JSPaste"};
+        this.#headers = {} //{"User-Agent": "JSPaste"};
     }
 
     access(resource: string) {
@@ -55,6 +55,7 @@ export default class Request {
 
         return {
             raw: response,
+            // TODO: Catch non-JSON responses
             api: await response.json(),
         };
     }

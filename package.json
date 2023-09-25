@@ -51,7 +51,7 @@
     "testMatch": [
       "**/__tests__/**/*.jest.[jt]s"
     ],
-    "testTimeout": 1e4
+    "testTimeout": 5000
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

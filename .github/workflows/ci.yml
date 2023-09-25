@@ -43,17 +43,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Warming up (bun)
+        uses: oven-sh/setup-bun@v1
+
       - name: Warming up (node)
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache: npm
 
       - name: Warming up (deps)
-        run: npm ci
+        run: bun i
 
       - name: Cheking tests... (node)
-        run: npm run node:test
+        run: bun run node:test
 
       - if: always() && github.repository_owner == 'jspaste' && ${{ matrix.node }} == '18.x'
         name: Report to Codecov...

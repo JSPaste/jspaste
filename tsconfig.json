@@ -8,6 +8,9 @@
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outFile": "dist/index.d.js",
     "strict": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
@@ -20,6 +23,7 @@
     ]
   },
   "include": [
+    "__tests__/**/*.ts",
     "lib/**/*.ts"
   ]
 }

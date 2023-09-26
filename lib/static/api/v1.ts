@@ -1,6 +1,6 @@
 export const api = {
-    url: 'jspaste.tnfangel.xyz/',
-    route: {
-        documents: 'documents/'
-    }
+  url: 'jspaste.tnfangel.xyz/',
+  route: {
+    documents: 'documents/'
+  }
 }

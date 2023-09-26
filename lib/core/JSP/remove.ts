@@ -1,28 +1,28 @@
-import Request from "../Request.ts";
-import {api} from "../../static/api/v1.ts";
+import Request from '../Request.ts'
+import { api } from '../../static/api/v1.ts'
 
-export default async function remove(resource: string, secret: string): Promise<IRemoveResponse> {
-    const response = await new Request("DELETE", api.route.documents).remove(resource, secret);
+export default async function remove (resource: string, secret: string): Promise<IRemoveResponse> {
+  const response = await new Request('DELETE', api.route.documents).remove(resource, secret)
 
-    return {
-        req: {
-            valid: response.raw.ok,
-            resource: resource,
-            secret: secret
-        },
-        res: {
-            raw: response.raw
-        }
+  return {
+    req: {
+      valid: response.raw.ok,
+      resource,
+      secret
+    },
+    res: {
+      raw: response.raw
     }
+  }
 }
 
 export interface IRemoveResponse {
-    req: {
-        valid: boolean;
-        resource: string;
-        secret: string;
-    };
-    res: {
-        raw: Response;
-    };
+  req: {
+    valid: boolean
+    resource: string
+    secret: string
+  }
+  res: {
+    raw: Response
+  }
 }

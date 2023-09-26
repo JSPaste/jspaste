@@ -1,73 +1,73 @@
-import {api} from "../static/api/v1.ts";
-import JSPError from "./JSPError.ts";
+import { api } from '../static/api/v1.ts'
+import JSPError from './JSPError.ts'
 
 export default class Request {
-    readonly #endpoint;
-    readonly #method;
-    readonly #headers: any;
+  readonly #endpoint
+  readonly #method
+  readonly #headers: any
 
-    constructor(method: TMethod, route?: string) {
-        this.#endpoint = api.url + (route ?? "");
-        this.#method = method;
-        this.#headers = {"User-Agent": "JSPaste"};
+  constructor (method: TMethod, route?: string) {
+    this.#endpoint = api.url + (route ?? '')
+    this.#method = method
+    this.#headers = { 'User-Agent': 'JSPaste' }
+  }
+
+  async access (resource: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    const options = {
+      method: this.#method,
+      headers: this.#headers
     }
 
-    access(resource: string) {
-        const options = {
-            method: this.#method,
-            headers: this.#headers,
-        };
+    return await this.run(this.#endpoint + resource, options)
+  }
 
-        return this.run(this.#endpoint + resource, options)
+  async publish (payload: any) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    const options = {
+      method: this.#method,
+      body: payload,
+      headers: this.#headers
     }
 
-    publish(payload: any) {
-        const options = {
-            method: this.#method,
-            body: payload,
-            headers: this.#headers,
-        };
+    return await this.run(this.#endpoint, options)
+  }
 
-        return this.run(this.#endpoint, options)
+  async remove (resource: string, secret: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    this.#headers.secret = secret
+
+    const options = {
+      method: this.#method,
+      headers: this.#headers
     }
 
-    remove(resource: string, secret: string) {
-        this.#headers["secret"] = secret;
+    return await this.run(this.#endpoint + resource, options)
+  }
 
-        const options = {
-            method: this.#method,
-            headers: this.#headers,
-        };
+  /**
+   * @internal
+   */
+  async _test_run (url: string, badUA: boolean = false) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    if (badUA) this.#headers['User-Agent'] = 'null'
 
-        return this.run(this.#endpoint + resource, options)
+    const options = {
+      method: this.#method,
+      headers: this.#headers
     }
 
-    /*
-     * @internal
-     */
-    _test_run(url: string, bad_ua: boolean = false) {
-        if (bad_ua) this.#headers["User-Agent"] = "null";
+    return await this.run(url, options)
+  }
 
-        const options = {
-            method: this.#method,
-            headers: this.#headers,
-        };
+  private async run (url: string, options: any) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    try {
+      const response = await fetch('https://' + url, options)
 
-        return this.run(url, options)
+      return {
+        api: (response.headers.get('Content-Type')?.includes('application/json') ?? false) ? await response.json() : {},
+        raw: response
+      }
+    } catch (err) {
+      throw new JSPError('APIError', err as string)
     }
-
-    private async run(url: string, options: any) {
-        try {
-            const response = await fetch("https://" + url, options)
-
-            return {
-                raw: response,
-                api: response.headers.get("Content-Type")?.includes("application/json") ? await response.json() : {}
-            }
-        } catch (err) {
-            throw new JSPError("APIError", err);
-        }
-    }
+  }
 }
 
-export type TMethod = 'GET' | 'POST' | 'DELETE';
+export type TMethod = 'GET' | 'POST' | 'DELETE'

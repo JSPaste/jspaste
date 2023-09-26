@@ -1,10 +1,8 @@
 export default class JSPError extends Error {
-    constructor(type: TError, err: any, description?: string) {
-        if (description) err += "\n* " + description;
-
-        super(err);
-        this.name = "JSP" + type;
-    }
+  constructor (type: TError, description: string, err?: string) {
+    super(description + (err ? '\n' + err : '')) // eslint-disable-line @typescript-eslint/strict-boolean-expressions
+    this.name = 'JSP' + type
+  }
 }
 
-type TError = "InternalError" | "APIError";
+type TError = 'InternalError' | 'APIError'

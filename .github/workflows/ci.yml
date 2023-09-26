@@ -60,16 +60,16 @@ jobs:
 
       - if: ${{ matrix.node != '16.x' }}
         name: Cheking tests... (node)
-        run: bun run node:test
+        run: bun run test:node
 
       # Cloudflare WAF triggers with "undici" and GitHub Runners
       - if: ${{ matrix.node == '16.x' }}
         name: Cheking tests... (special-node)
         continue-on-error: true
-        run: bun run node:test
+        run: bun run test:node
 
       - if: ${{ always() && github.repository_owner == 'jspaste' && matrix.node == '20.x' }}
         name: Report to Codecov...
         uses: codecov/codecov-action@v3
         with:
-          files: ./coverage-final.json
+          files: ./__coverage__/coverage-final.json

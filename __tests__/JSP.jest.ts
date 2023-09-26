@@ -1,6 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
-// @ts-ignore
 import JSP from "../lib/JSP.ts";
+import Request from "../lib/core/Request.ts";
 
 describe("JSP#", () => {
     const jsp = new JSP();
@@ -20,16 +20,16 @@ describe("JSP#", () => {
         secret = <string>x.res.secret
     });
 
-    test(".access() -> invalid", async () => {
+    test(".access() #Invalid", async () => {
         const x = await jsp.access(".invalid.");
 
         expect(x).toBeInstanceOf(Object);
-        expect(x.res.payload).toBeUndefined();
+        expect(x.res.payload).toBeNull();
         expect(x.req.valid).toBeFalsy();
         console.debug(x)
     });
 
-    test(".access() -> valid", async () => {
+    test(".access() #Valid", async () => {
         const x = await jsp.access(resource);
 
         expect(x).toBeInstanceOf(Object);
@@ -38,7 +38,7 @@ describe("JSP#", () => {
         console.debug(x)
     });
 
-    test(".remove() -> invalid", async () => {
+    test(".remove() #Invalid", async () => {
         const x = await jsp.remove(resource, ".invalid.");
 
         expect(x).toBeInstanceOf(Object);
@@ -46,11 +46,19 @@ describe("JSP#", () => {
         console.debug(x)
     });
 
-    test(".remove() -> valid", async () => {
+    test(".remove() #Valid", async () => {
         const x = await jsp.remove(resource, secret);
 
         expect(x).toBeInstanceOf(Object);
         expect(x.req.valid).toBeTruthy();
         console.debug(x)
+    });
+});
+
+describe("@internal Request#", () => {
+    test("._test_run() #MalformedURL", () => {
+        expect(async () => {
+            await new Request("GET")._test_run("badurl.æ~")
+        }).toThrow(Error);
     });
 });

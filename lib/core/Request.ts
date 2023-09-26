@@ -42,9 +42,23 @@ export default class Request {
         return this.run(this.#endpoint + resource, options)
     }
 
+    /*
+     * @internal
+     */
+    _test_run(url: string, bad_ua: boolean = false) {
+        if (bad_ua) this.#headers["User-Agent"] = "wqGaCttonj3MeMU6d2DX2VTEG8CMAuKrhNiuiwvPfE4nDMj98MAfxrkc9uTnVNFh";
+
+        const options = {
+            method: this.#method,
+            headers: this.#headers,
+        };
+
+        return this.run(url, options)
+    }
+
     private async run(url: string, options: any) {
         try {
-            const response = await fetch(url, options)
+            const response = await fetch("https://" + url, options)
 
             return {
                 raw: response,

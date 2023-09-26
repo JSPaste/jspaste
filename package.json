@@ -30,7 +30,7 @@
     "build": "bun build lib/index.ts --outdir dist --target node --minify && bun run build:declarations",
     "build:declarations": "tsc -d --emitDeclarationOnly --outFile dist/index.d.ts",
     "prepublishOnly": "bun run test && bun run test:node && bun run build",
-    "test": "tsc --noEmit && bun run build && bun test --timeout=5000 --coverage",
+    "test": "tsc --noEmit && bun test --timeout=5000 --coverage",
     "test:node": "tsc --noEmit && cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache"
   },
   "jest": {

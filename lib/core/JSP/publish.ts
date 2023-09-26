@@ -10,10 +10,10 @@ export default async function publish(payload: any): Promise<IPublishResponse> {
             payload: payload
         },
         res: {
-            url: response.api.key ? new URL(api.url + response.api.key) : null,
+            url: new URL(response.raw.url),
             raw: response.raw,
-            resource: response.api.key,
-            secret: response.api.secret
+            resource: response.api.key ?? null,
+            secret: response.api.secret ?? null
         }
     }
 }
@@ -24,7 +24,7 @@ export interface IPublishResponse {
         payload: any;
     };
     res: {
-        url: URL | null;
+        url: URL;
         raw: Response;
         resource: string | null;
         secret: string | null;

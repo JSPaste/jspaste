@@ -46,7 +46,7 @@ export default class Request {
      * @internal
      */
     _test_run(url: string, bad_ua: boolean = false) {
-        if (bad_ua) this.#headers["User-Agent"] = "wqGaCttonj3MeMU6d2DX2VTEG8CMAuKrhNiuiwvPfE4nDMj98MAfxrkc9uTnVNFh";
+        if (bad_ua) this.#headers["User-Agent"] = "null";
 
         const options = {
             method: this.#method,

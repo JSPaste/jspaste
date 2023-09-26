@@ -58,8 +58,7 @@ describe("JSP#", () => {
 describe("@internal Request#", () => {
     test("._test_run() #MalformedURL", () => {
         expect(async () => {
-            const x = await new Request("GET")._test_run("badurl.æ~")
-            console.log(x)
-        }).toThrow();
+            await new Request("GET")._test_run("badurl.æ~");
+        }).rejects.toThrow(Error);
     });
 });

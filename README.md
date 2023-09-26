@@ -1,62 +1,38 @@
-<div align="center">
-<a href="https://jspaste.tnfangel.xyz/"><img alt="JSPaste" height="300" src="https://static.geo.inetol.net/media/jspaste.avif"/></a>
+# jspaste
 
-[![](https://flat.badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
-[![](https://flat.badgen.net/npm/dt/jspaste)](https://www.npmjs.com/package/jspaste)
-[![](https://flat.badgen.net/codecov/c/github/jspaste/jspaste)](https://app.codecov.io/gh/jspaste/jspaste)
-[![](https://flat.badgen.net/packagephobia/install/jspaste)](https://packagephobia.com/result?p=jspaste)
-[![](https://flat.badgen.net/bundlephobia/minzip/jspaste)](https://bundlephobia.com/package/jspaste)
+The official library to interact with JSPaste API
 
-<h4>Powerful library to easily interact with JSPaste API</h4>
-</div>
+[![](https://badgen.net/npm/v/jspaste)](https://www.npmjs.com/package/jspaste)
+[![](https://badgen.net/packagephobia/install/jspaste)](https://packagephobia.com/result?p=jspaste)
+[![](https://badgen.net/codecov/c/github/jspaste/jspaste)](https://app.codecov.io/gh/jspaste/jspaste)
+[![](https://badgen.net/github/checks/jspaste/jspaste)](https://github.com/jspaste/jspaste)
+
+[![JS Standard](https://cdn.jsdelivr.net/gh/standard/standard@master/badge.svg)](https://github.com/standard/standard)
+
+> __PSA:__ jspaste v10.1.0 onwards is not guaranteed to work properly with CommonJS. If you wish to use CommonJS then
+> downgrade to v10.0.x which will be updated with security updates until its discontinuation on December 28th, 2024,
+> read more [here](TODO).
 
 ## Features
 
-🔸 **Tough as nails;** Built with TypeScript in mind, you can rely on it not giving you trouble when you need it most. \
-🔸 **Light as a feather;** Uses just [ONE](https://wikipedia.org/wiki/1) ultra-lightweight dependency. \
-🔸 **Easy to use;** Gives you back what you need when you need it. Period. \
-🔸 **Seamlessly compatible;** We support [ESModules](https://nodejs.org/api/esm.html#modules-ecmascript-modules) and
-prehistoric [CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules) alike.
-
-## Install
-
-With [**npm**](https://github.com/npm/cli):
-
-```
-$ npm i --save jspaste
-```
-
-With [**pnpm**](https://github.com/pnpm/pnpm):
-
-```
-$ pnpm add jspaste
-```
-
-With [**yarn**](https://github.com/yarnpkg/berry):
-
-```
-$ yarn add jspaste
-```
+🔸 __Right out the oven;__ Aligned to work with the latest and greatest features of ES2022 spec. and TypeScript 5.\
+🔸 __Light as a feather;__ Surprise! No dependencies for newer releases of Node.js 18, for older versions
+read [here](TODO). \
+🔸 __Compatibility;__ With first-class support for Bun and the latest releases of Node.js up to the old v16.11.0. \
+🔸 __Ease of use;__ Gives you what you need when you need it, period.
 
 ## Get started
 
-Start building something awesome straight from your IDE, or if you prefer having all the documentation on a separate
-book, have a look at our [documentation](https://paka.dev/npm/jspaste).
-
-### Example
-
-With [**ESModules**](https://nodejs.org/api/esm.html#modules-ecmascript-modules):
+Start building something awesome straight from your [IDE](https://paka.dev/npm/jspaste), or if you prefer having all the
+documentation on a separate
+book, have a look at our [documentation](https://github.com/jspaste/jspaste/wiki/Get-started).
 
 ```js
 import JSP from 'jspaste';
 
-new JSP().access('ujcbfrryaqoclfea').then(console.info);
-```
+const jsp = new JSP();
+const {req, res} = await jsp.access("foo")
 
-With [**CommonJS**](https://nodejs.org/api/modules.html#modules-commonjs-modules):
-
-```js
-const JSP = require('jspaste');
-
-new JSP().access('ujcbfrryaqoclfea').then(console.info);
+console.info("Retrieved from:", req.resource) // Retrieved from: foo
+console.info("Retrieved data:", res.payload) // Retrieved data: Hello World!
 ```

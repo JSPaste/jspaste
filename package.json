@@ -20,18 +20,18 @@
     "Aidak",
     "Ivan Gabaldon <git[at]inetol.net>"
   ],
-  "sideEffects": true,
   "type": "module",
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "bun run build:check && bun build lib/index.ts --outdir dist --target node --minify ",
-    "build:check": "tsc",
-    "node:test": "npm run build:check && cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache",
-    "prepublishOnly": "bun run test && bun run build",
-    "test": "bun run build && bun test --timeout=10000 --coverage"
+    "build": "bun build lib/index.ts --outdir dist --target node --minify && bun run build:declarations",
+    "build:declarations": "tsc -d --emitDeclarationOnly --outFile dist/index.d.ts",
+    "prepublishOnly": "bun run test && bun run test:node && bun run build",
+    "test": "tsc --noEmit && bun run build && bun test --timeout=5000 --coverage",
+    "test:node": "tsc --noEmit && cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache"
   },
   "jest": {
     "clearMocks": true,

@@ -8,12 +8,9 @@
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "composite": true,
     "strict": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "stripInternal": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,5 +18,8 @@
     "types": [
       "bun-types"
     ]
-  }
+  },
+  "include": [
+    "lib/**/*.ts"
+  ]
 }

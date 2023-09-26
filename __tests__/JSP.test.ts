@@ -59,6 +59,6 @@ describe("@internal Request#", () => {
     test("._test_run() #MalformedURL", () => {
         expect(async () => {
             await new Request("GET")._test_run("badurl.æ~");
-        }).rejects.toThrow(Error);
+        }).toThrow(Error);
     });
 });

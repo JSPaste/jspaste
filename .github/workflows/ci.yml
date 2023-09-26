@@ -68,7 +68,7 @@ jobs:
         continue-on-error: true
         run: bun run test:node
 
-      - if: ${{ always() && github.repository_owner == 'jspaste' && matrix.node == '20.x' }}
+      - if: ${{ always() && github.repository_owner == 'jspaste' && matrix.node == ('16.x' || '20.x') }}
         name: Report to Codecov...
         uses: codecov/codecov-action@v3
         with:

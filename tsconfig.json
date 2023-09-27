@@ -10,7 +10,7 @@
     "allowImportingTsExtensions": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outFile": "dist/index.d.js",
+    "outFile": "dist/index.ts",
     "strict": true,
     "downlevelIteration": true,
     "skipLibCheck": true,

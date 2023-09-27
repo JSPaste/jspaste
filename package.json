@@ -1,7 +1,7 @@
 {
   "name": "jspaste",
   "version": "0.0.0",
-  "description": "Powerful library to easily interact with JSPaste API",
+  "description": "The official library to interact with JSPaste API",
   "keywords": [
     "hastebin",
     "jspaste",
@@ -75,11 +75,10 @@
     "node": ">=16.11.0"
   },
   "ts-standard": {
-    "project": "./tsconfig.json",
+    "project": "tsconfig.json",
     "ignore": [
-      "dist",
-      "node_modules",
-      "src/**/*.js"
+      "__coverage__",
+      "dist"
     ]
   }
 }

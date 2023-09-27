@@ -59,7 +59,7 @@ describe('JSP#', () => {
 describe('@internal Request#', () => {
   test('._test_run() #MalformedURL', async () => {
     await expect(async () => {
-      await new Request('GET')._test_run('nyaa.æ~')
+      await new Request('GET')._test_fetch('nyaa.æ~')
     }).rejects.toThrow(Error)
   })
 })

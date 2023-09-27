@@ -1,8 +1,7 @@
-import access, { IAccessResponse } from './core/JSP/access.ts'
-import publish, { IPublishResponse } from './core/JSP/publish.ts'
-import remove, { IRemoveResponse } from './core/JSP/remove.ts'
 import JSPError from './core/JSPError.ts'
 import { error } from './static/messages.ts'
+import Request, { IAccessResponse, IPublishResponse, IRemoveResponse } from './core/Request.ts'
+import { api } from './static/api/v1.ts'
 
 /**
  * JSPaste main class, all magic resides here ✨
@@ -43,7 +42,7 @@ export default class JSP {
    * console.info({ ack.res.url, ack.res.resource, ack.res.secret });
    * @param {any} payload Data to upload
    */
-  publish = async (payload: any): Promise<IPublishResponse> => await publish(payload)
+  publish = async (payload: any): Promise<IPublishResponse> => await new Request('POST', api.route.documents).publish(String(payload))
 
   /**
    * Retrieves the content of a previously published resource
@@ -61,7 +60,7 @@ export default class JSP {
    * console.info({ ack.res.payload });
    * @param {string} resource Resource identifier
    */
-  access = async (resource: string): Promise<IAccessResponse> => await access(resource)
+  access = async (resource: string): Promise<IAccessResponse> => await new Request('GET', api.route.documents).access(resource)
 
   /**
    * Removes the content of a previously published resource
@@ -77,5 +76,5 @@ export default class JSP {
    * @param {string} resource Resource identifier
    * @param {string} secret Owner key which verifies the ownership of a "resource" in the API
    */
-  remove = async (resource: string, secret: string): Promise<IRemoveResponse> => await remove(resource, secret)
+  remove = async (resource: string, secret: string): Promise<IRemoveResponse> => await new Request('DELETE', api.route.documents).remove(resource, secret)
 }

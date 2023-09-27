@@ -1,64 +1,81 @@
 import { api } from '../static/api/v1.ts'
 import JSPError from './JSPError.ts'
 
+/**
+ * @internal
+ */
 export default class Request {
   readonly #endpoint
-  readonly #method
-  readonly #headers: any
+  readonly #options: any
 
   constructor (method: TMethod, route?: string) {
     this.#endpoint = api.url + (route ?? '')
-    this.#method = method
-    this.#headers = { 'User-Agent': 'JSPaste' }
+    this.#options = {
+      method,
+      headers: { 'User-Agent': 'JSPaste' }
+    }
   }
 
-  async access (resource: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
-    const options = {
-      method: this.#method,
-      headers: this.#headers
-    }
+  async access (resource: string): Promise<IAccessResponse> { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    const response = await this.run(this.#endpoint + resource)
 
-    return await this.run(this.#endpoint + resource, options)
+    return {
+      req: {
+        valid: response.raw.ok,
+        resource
+      },
+      res: {
+        url: new URL(response.raw.url),
+        raw: response.raw,
+        payload: response.api.data ?? null
+      }
+    }
   }
 
-  async publish (payload: any) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
-    const options = {
-      method: this.#method,
-      body: payload,
-      headers: this.#headers
-    }
+  async publish (payload: any): Promise<IPublishResponse> { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    this.#options.body = payload
+    const response = await this.run(this.#endpoint)
 
-    return await this.run(this.#endpoint, options)
+    return {
+      req: {
+        valid: response.raw.ok,
+        payload
+      },
+      res: {
+        url: new URL(response.raw.url),
+        raw: response.raw,
+        resource: response.api.key ?? null,
+        secret: response.api.secret ?? null
+      }
+    }
   }
 
-  async remove (resource: string, secret: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
-    this.#headers.secret = secret
+  async remove (resource: string, secret: string): Promise<IRemoveResponse> { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    this.#options.headers.secret = secret
+    const response = await this.run(this.#endpoint + resource)
 
-    const options = {
-      method: this.#method,
-      headers: this.#headers
+    return {
+      req: {
+        valid: response.raw.ok,
+        resource,
+        secret
+      },
+      res: {
+        raw: response.raw
+      }
     }
-
-    return await this.run(this.#endpoint + resource, options)
   }
 
   /**
-   * @internal
+   * Reserved exclusively for test suite.
    */
-  async _test_run (url: string, badUA: boolean = false) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
-    if (badUA) this.#headers['User-Agent'] = 'null'
-
-    const options = {
-      method: this.#method,
-      headers: this.#headers
-    }
-
-    return await this.run(url, options)
+  async _test_fetch (url: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+    return await this.run(url)
   }
 
-  private async run (url: string, options: any) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
+  private async run (url: string) { // eslint-disable-line @typescript-eslint/explicit-function-return-type
     try {
-      const response = await fetch('https://' + url, options)
+      const response = await fetch('https://' + url, this.#options)
 
       return {
         api: (response.headers.get('Content-Type')?.includes('application/json') ?? false) ? await response.json() : {},
@@ -70,4 +87,43 @@ export default class Request {
   }
 }
 
+/**
+ * @internal
+ */
 export type TMethod = 'GET' | 'POST' | 'DELETE'
+
+export interface IAccessResponse {
+  req: {
+    valid: boolean
+    resource: string
+  }
+  res: {
+    url: URL
+    raw: Response
+    payload: any
+  }
+}
+
+export interface IPublishResponse {
+  req: {
+    valid: boolean
+    payload: any
+  }
+  res: {
+    url: URL
+    raw: Response
+    resource: string | null
+    secret: string | null
+  }
+}
+
+export interface IRemoveResponse {
+  req: {
+    valid: boolean
+    resource: string
+    secret: string
+  }
+  res: {
+    raw: Response
+  }
+}

@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "build": "bun build lib/index.ts --outdir dist --target node --minify && bun run build:declarations",
-    "build:declarations": "tsc",
+    "build:declarations": "tsc --project tsconfig.build.json",
     "prepublishOnly": "bun run test && bun run test:node && bun run build",
     "test": "ts-standard --fix && bun test --timeout=5000 --coverage",
     "test:node": "ts-standard --fix && cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache"

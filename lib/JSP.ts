@@ -17,11 +17,12 @@ import { api } from './static/api/v1.ts'
 export default class JSP {
   constructor () {
     if (parseFloat(process.versions.node) < 18) {
-      try {
-        globalThis.fetch = require('undici').fetch // eslint-disable-line @typescript-eslint/no-var-requires
-      } catch {
+      // @ts-expect-error
+      import('undici').then((undici) => {
+        globalThis.fetch = undici.fetch
+      }).catch(() => {
         throw new JSPError('InternalError', error.PACKAGE_UNDICI_MISSING)
-      }
+      })
     }
   }
 

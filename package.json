@@ -25,7 +25,6 @@
   "exports": {
     ".": {
       "bun": "./dist/index.mjs",
-      "default": "./dist/index.mjs",
       "deno": "./dist/index.mjs",
       "node": {
         "import": {
@@ -37,6 +36,7 @@
           "types": "./types/index.d.cts"
         }
       },
+      "default": "./dist/index.mjs",
       "types": "./types/index.d.mts"
     }
   },

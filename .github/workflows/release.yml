@@ -8,7 +8,7 @@ jobs:
     name: Release new version
     runs-on: ubuntu-latest
 
-    if: github.repository_owner == 'jspaste'
+    if: ${{ github.repository_owner == 'jspaste' }}
     steps:
       - uses: actions/checkout@v4
 

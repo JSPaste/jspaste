@@ -32,7 +32,7 @@ jobs:
       - name: Cheking tests... (bun)
         run: bun run test
 
-  node-test:
+  test-node:
     name: "Test with Node v${{ matrix.node }}"
     runs-on: ubuntu-latest
     strategy:

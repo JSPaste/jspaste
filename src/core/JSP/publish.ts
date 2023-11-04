@@ -10,7 +10,7 @@ export default async function publish (payload: any): Promise<IPublishResponse> 
       payload
     },
     res: {
-      url: response.raw.ok ? (response.raw.url + response.api.key) : null,
+      url: response.raw.ok ? (response.raw.url + response.api.key) : null, // eslint-disable-line @typescript-eslint/restrict-plus-operands
       raw: response,
       resource: response.api.key ?? null,
       secret: response.api.secret ?? null

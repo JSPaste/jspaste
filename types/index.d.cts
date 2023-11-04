@@ -47,7 +47,7 @@ declare class JSP {
      * @example
      * // Upload a stack trace for later debugging
      * jsp.publish(foo).then(ack => {
-     *     console.info("Stack trace uploaded to:", ack.res.url)
+     *     console.info('Stack trace uploaded to:', ack.res.url)
      * })
      * @param {any} payload Data to upload
      * @return {Promise<IPublishResponse>}
@@ -58,7 +58,7 @@ declare class JSP {
      * Access the content uploaded to JSPaste.
      * @example
      * // Retrieve and log the "foobar" resource content
-     * jsp.access("foobar").then(ack => {
+     * jsp.access('foobar').then(ack => {
      *     console.log(ack.res.payload)
      * })
      * @param {string} resource Resource identifier
@@ -70,9 +70,9 @@ declare class JSP {
      * Remove the content uploaded to JSPaste.
      * @example
      * // Delete the "foobar" resource
-     * jsp.remove("foobar", "ultrasecret").then(ack => {
-     *     if (ack.req.valid) console.info("Resource deleted.")
-     *     else console.info("Resource deletion failed.")
+     * jsp.remove('foobar', 'ultrasecret').then(ack => {
+     *     if (ack.req.valid) console.info('Resource deleted.')
+     *     else console.info('Resource deletion failed.')
      * })
      * @param {string} resource Resource identifier
      * @param {string} secret Key to validate ownership of the resource

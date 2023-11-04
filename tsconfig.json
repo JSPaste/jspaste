@@ -3,27 +3,27 @@
     "lib": [
       "ES2022"
     ],
-    "module": "es2022",
-    "target": "es2022",
+    "module": "ES2022",
+    "target": "ES2022",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
+
     "allowImportingTsExtensions": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outFile": "dist/index.ts",
-    "strict": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "stripInternal": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "stripInternal": true,
     "types": [
       "bun-types"
     ]
   },
   "include": [
     "__tests__/**/*.ts",
-    "lib/**/*.ts"
+    "src/**/*.ts"
   ]
 }

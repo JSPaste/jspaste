@@ -9,15 +9,10 @@ The official library to interact with JSPaste API
 
 [![JS Standard](https://cdn.jsdelivr.net/gh/standard/standard@master/badge.svg)](https://github.com/standard/standard)
 
-> __PSA:__ jspaste v10.1.0 onwards is not guaranteed to work properly with CommonJS. If you wish to use CommonJS then
-> downgrade to v10.0.x which will be updated with security updates until its discontinuation on December 28th, 2024,
-> read more [here](TODO).
-
 ## Features
 
 🔸 __Right out the oven;__ Aligned to work with the latest and greatest features of ES2022 spec. and TypeScript 5.\
-🔸 __Light as a feather;__ Surprise! No dependencies for newer releases of Node.js 18, for older versions
-read [here](TODO). \
+🔸 __Light as a feather;__ Uses just ONE dependency. \
 🔸 __Compatibility;__ With first-class support for Bun and the latest releases of Node.js up to the old v16.11.0. \
 🔸 __Ease of use;__ Gives you what you need when you need it, period.
 

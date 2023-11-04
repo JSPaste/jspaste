@@ -1,0 +1,20 @@
+{
+  "clearMocks": true,
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*.ts"
+  ],
+  "coverageDirectory": "__coverage__",
+  "coverageReporters": [
+    "json"
+  ],
+  "errorOnDeprecated": true,
+  "preset": "ts-jest",
+  "roots": [
+    "<rootDir>/__tests__/"
+  ],
+  "testMatch": [
+    "**/*.jest.[jt]s"
+  ],
+  "testTimeout": 5000
+}

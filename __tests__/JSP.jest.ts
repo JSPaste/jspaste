@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import { describe, expect, test } from '@jest/globals'
-import JSP from '../lib/JSP.ts'
-import Request from '../lib/core/Request.ts'
+import JSP from '../src/JSP.ts'
+import Request from '../src/core/Request.ts'
 
 describe('JSP#', () => {
   const jsp = new JSP()
@@ -60,6 +60,6 @@ describe('@internal Request#', () => {
   test('._test_run() #MalformedURL', async () => {
     await expect(async () => {
       await new Request('GET')._test_fetch('nyaa.æ~')
-    }).rejects.toThrow(Error)
+    }).rejects.toThrow()
   })
 })

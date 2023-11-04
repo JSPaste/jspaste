@@ -10,7 +10,7 @@ export default async function access (resource: string): Promise<IAccessResponse
       resource
     },
     res: {
-      url: new URL(response.raw.url),
+      url: response.raw.ok ? response.raw.url : null,
       raw: response,
       payload: response.api.data ?? null
     }
@@ -23,7 +23,7 @@ export interface IAccessResponse {
     resource: string
   }
   res: {
-    url: URL
+    url: string | null
     raw: any
     payload: any
   }

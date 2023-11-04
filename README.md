@@ -12,7 +12,7 @@ The official library to interact with JSPaste API
 ## Features
 
 🔸 __Right out the oven;__ Aligned to work with the latest and greatest features of ES2022 spec. and TypeScript 5.\
-🔸 __Light as a feather;__ Uses just ONE dependency. \
+🔸 __Light as a feather;__ ZERO dependency. \
 🔸 __Compatibility;__ With first-class support for Bun and the latest releases of Node.js up to the old v16.11.0. \
 🔸 __Ease of use;__ Gives you what you need when you need it, period.
 

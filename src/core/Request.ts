@@ -1,5 +1,4 @@
 import { api } from '../static/api/v1.ts'
-import { fetch, Response } from 'node-fetch-native'
 import JSPError from './JSPError.ts'
 
 /**

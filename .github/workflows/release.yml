@@ -1,31 +1,33 @@
-name: publish
+name: Release
 on:
   release:
     types: [ created ]
 
 jobs:
-  publish:
-    name: Publish JSPaste
+  release:
+    name: Release new version
     runs-on: ubuntu-latest
 
-    if: github.repository_owner == 'jspaste'
+    if: ${{ github.repository_owner == 'jspaste' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: Warming up (bun)
+        uses: oven-sh/setup-bun@v1
 
       - name: Warming up (node)
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 20.x
           registry-url: 'https://registry.npmjs.org'
-          cache: npm
 
       - name: Warming up (deps)
-        run: npm ci
+        run: bun i
 
       - name: Set version...
         run: npm version "${{ github.event.release.tag_name }}" --git-tag-version false
 
       - name: Build and Publish!
-        run: npm publish --tag latest
+        run: npm publish --provenance --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

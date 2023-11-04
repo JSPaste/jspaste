@@ -1,0 +1,6 @@
+telemetry = false
+
+[test]
+root = "./__tests__"
+timeout = 5000
+coverage = false

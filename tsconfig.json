@@ -1,39 +1,30 @@
 {
   "compilerOptions": {
     "lib": [
-      "ES2021"
+      "ES2022"
     ],
-    "module": "CommonJS",
+    "module": "ES2022",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "target": "ES2021",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
-    "declaration": true,
-    "newLine": "lf",
-    "outDir": "dist",
-    "stripInternal": true,
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noEmit": true,
-    "useDefineForClassFields": true,
-    "isolatedModules": true,
+
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
-    "alwaysStrict": true,
-    "strictBindCallApply": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "stripInternal": true,
+    "types": [
+      "bun-types"
+    ]
   },
   "include": [
-    "lib/**/*.ts"
+    "./__tests__/**/*.ts",
+    "./src/**/*.ts",
+    "./dist/**/*.d.cts"
   ]
 }

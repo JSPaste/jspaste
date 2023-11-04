@@ -15,8 +15,8 @@ pids
 .env
 
 # Dist
-dist/
-*.tgz
+dist/**
+!dist/**/*.d.cts
 
 # Miscellaneous
 .tmp/
@@ -24,6 +24,7 @@ dist/
 .idea/
 .DS_Store
 .turbo
+*.tgz
 tsconfig.tsbuildinfo
 coverage/
 __coverage__/

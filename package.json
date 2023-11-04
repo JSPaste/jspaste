@@ -22,37 +22,18 @@
   ],
   "sideEffects": false,
   "type": "module",
-  "exports": {
-    ".": {
-      "bun": "./dist/index.mjs",
-      "deno": "./dist/index.mjs",
-      "node": {
-        "import": {
-          "default": "./dist/index.mjs",
-          "types": "./types/index.d.mts"
-        },
-        "require": {
-          "default": "./dist/index.cjs",
-          "types": "./types/index.d.cts"
-        }
-      },
-      "default": "./dist/index.mjs",
-      "types": "./types/index.d.mts"
-    }
-  },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./types/index.d.cts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "directories": {
     "lib": "src",
     "test": "__tests__"
   },
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "build": "tsc && esbuild --bundle --minify --platform=node --outfile=dist/index.cjs src/index.ts && esbuild --bundle --minify --platform=neutral --outfile=dist/index.mjs src/index.ts",
+    "build": "tsc && esbuild --bundle --minify --platform=node --outfile=./dist/index.cjs ./src/index.ts && esbuild --bundle --minify --platform=neutral --outfile=./dist/index.js ./src/index.ts",
     "lint": "ts-standard --fix",
     "prepack": "bun run build",
     "test": "bun run lint && bun test",
@@ -73,9 +54,11 @@
   "engineStrict": true,
   "ts-standard": {
     "ignore": [
-      "__coverage__",
-      "dist"
+      "./__coverage__",
+      "./dist/**/*.js",
+      "./dist/**/*.cjs",
+      "./dist/**/*.mjs"
     ],
-    "project": "tsconfig.json"
+    "project": "./tsconfig.json"
   }
 }

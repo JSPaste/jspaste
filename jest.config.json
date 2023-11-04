@@ -2,7 +2,7 @@
   "clearMocks": true,
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**/*.ts"
+    "<rootDir>/src/**/*.ts"
   ],
   "coverageDirectory": "__coverage__",
   "coverageReporters": [

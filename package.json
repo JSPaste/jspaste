@@ -23,7 +23,6 @@
     "Aidak",
     "Ivan Gabaldon <git[at]inetol.net>"
   ],
-  "sideEffects": false,
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,7 +35,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc && esbuild --bundle --minify --platform=node --outfile=./dist/index.cjs ./src/index.ts && esbuild --bundle --minify --platform=neutral --outfile=./dist/index.js ./src/index.ts",
+    "build": "tsc && esbuild --bundle --minify --platform=node --outfile=./dist/index.cjs ./src/index.ts && bun build --minify --target=node --format=esm --outdir=./dist ./src/index.ts",
     "lint": "ts-standard --fix",
     "prepack": "bun run build",
     "test": "bun run lint && bun test",

@@ -81,4 +81,4 @@ declare class JSP {
     remove: (resource: string, secret: string) => Promise<IRemoveResponse>
 }
 
-export = JSP
+export { JSP }

@@ -17,14 +17,14 @@ The official library to interact with JSPaste API
 
 ## Get started
 
-Start building something awesome straight from your [IDE](https://paka.dev/npm/jspaste), or if you prefer having all the
+Start building something awesome straight from your [IDE](https://code.visualstudio.com/docs/editor/intellisense), or if you prefer having all the
 documentation on a separate booklet, have a look at 
 our [documentation](https://github.com/jspaste/jspaste/wiki/Get-started).
 
 ```js
-import JSP from 'jspaste';
+import { JSP } from 'jspaste'
 
-const jsp = new JSP();
+const jsp = new JSP()
 const { req, res } = await jsp.access('foobar')
 
 console.info('Retrieved from:', req.resource) // Retrieved from: foobar

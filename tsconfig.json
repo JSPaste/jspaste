@@ -1,30 +1,32 @@
 {
-  "compilerOptions": {
-    "lib": [
-      "ES2022"
-    ],
-    "module": "ES2022",
-    "target": "ES2022",
-    "moduleResolution": "bundler",
-    "moduleDetection": "force",
+	"$schema": "https://json.schemastore.org/tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2023"],
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"moduleResolution": "Bundler",
 
-    "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "stripInternal": true,
-    "types": [
-      "bun-types"
-    ]
-  },
-  "include": [
-    "./__tests__/**/*.ts",
-    "./src/**/*.ts",
-    "./dist/**/*.d.cts"
-  ]
+		"allowJs": true,
+		"allowImportingTsExtensions": true,
+		"esModuleInterop": true,
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+
+		"strict": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"verbatimModuleSyntax": true
+	},
+	"include": ["src/"],
+	"exclude": ["dist/", "node_modules/", "**/*.test.ts"]
 }

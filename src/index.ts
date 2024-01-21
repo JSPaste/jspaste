@@ -1,3 +1,1 @@
-import JSP from './JSP.ts'
-
-export { JSP }
+export { JSP } from './internal/JSP.ts';
